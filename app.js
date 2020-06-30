@@ -11,13 +11,15 @@ const User = require('./models/user');
 const session = require('express-session');
 const mongoose = require('mongoose');
 const methodOverride = require('method-override');
-const seedPosts = require('./seeds');
-seedPosts();
+const expressSanitizer = require('express-sanitizer');
+// const seedPosts = require('./seeds');
+// seedPosts();
 
 // require routes
 const index 	= require('./routes/index');
 const posts 	= require('./routes/posts');
 const reviews = require('./routes/reviews');
+const replies = require('./routes/replies')
 
 const app = express();
 
@@ -27,7 +29,7 @@ mongoose.connect('mongodb://localhost:27017/surf-shop', {
   useNewUrlParser: true,
   useCreateIndex: true
 });
-// mongoose.connect("mongodb+srv://mo:password135@cluster0-msqch.mongodb.net/test?retryWrites=true&w=majority");
+
 
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
@@ -51,6 +53,9 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(methodOverride('_method'));
 
+//Add moment to every view
+app.locals.moment = require('moment');
+
 // Configure Passport and Sessions
 app.use(session({
   secret: 'hang ten dude!',
@@ -68,10 +73,8 @@ passport.deserializeUser(User.deserializeUser());
 // set local variables middleware
 app.use(function(req, res, next) {
   // req.user = {
-  //   // '_id' : '5bb27cd1f986d278582aa58c',
-  //   // '_id' : '5bc521c0b142b6d7f7523406',
-  //   '_id' : '5bfed10ad176f845e38aec92',
-  //   'username' : 'ian3'
+  //   '_id' : '5d35ca2944a91b20684dd02c',
+  //   'username' : 'mo'
   // }
   res.locals.currentUser = req.user;
   // set default page title
@@ -86,10 +89,14 @@ app.use(function(req, res, next) {
   next();
 });
 
+// Mount express-sanitizer middleware here
+app.use(expressSanitizer());
+
 // Mount routes
 app.use('/', index);
 app.use('/posts', posts);
 app.use('/posts/:id/reviews', reviews);
+app.use('/posts/:id/reviews/:review_id/replies', replies);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

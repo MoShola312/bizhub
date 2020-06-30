@@ -28,10 +28,7 @@
 .clear-rating {
   display: block;
 }
-
-
-
-
-
-
-
+.reply-body {
+  border: 2px solid rgb(184, 182, 182);
+  border-radius: 15px ;
+}

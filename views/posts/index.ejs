@@ -1,20 +1,58 @@
 <% layout('layouts/boilerplate') -%>
+
 <h1>Posts Index!</h1>
-<div id="map"></div>
-
-<% include ../partials/paginatePosts %>
-
-<% posts.docs.forEach(function(post) { %>
-	<div>
-		<h2><%= post.title %></h2>
-		<div>Price: <%= post.price %></div>
-		<div><%= post.description %></div>
-		<div><%= post.location %></div>
-		<div><a href="/posts/<%= post.id %>">View more</a></div>
+<div class="container">
+	    <div class="row">
+	            <div class="col-4">
+	            	<% include ../partials/searchFilter %>
+	    		</div>
+	    <div class="col-8">
+	        <div id="map"></div>
+	    </div>
 	</div>
-<% }); %>
+</div>
 
-<% include ../partials/paginatePosts %>
+<div class="container">
+	<% include ../partials/paginatePosts %>
+	<div class="row text-center" style="display:flex;">
+		<% posts.docs.forEach(function(post) { %>
+		<div class="col-lg-4 col-md-4 col-sm-6 mb-4">
+			<div class="card" style="width: 18rem;">
+				
+				<% if(post.images.length != 0){ %>
+					<a href="/posts/<%= post.id %>"><img class="card-img-top" src="<%= post.images[0].url %>" alt="wrappixel kit"></a>
+				<% } %>
+
+				<div class="card-body">
+				<h5 class="card-title"><%= post.title %></h5>
+				<!-- <h7>Price: <%= post.price %></h7> -->
+				<% for(let i = 0; i < 5; i++) { %>
+					<% if(i < Math.floor(post.avgRating)) { %>
+						<!-- display a full star -->
+						<i class="fas fa-star"></i>
+					<% } else if((post.avgRating - i) > 0 && (post.avgRating - i) < 1) { %>
+							<!-- display a half star -->
+							<i class="fas fa-star-half-alt"></i>
+						<% } else { %>
+								<!-- display an empty star -->
+								<i class="far fa-star"></i>
+							<% } %>
+				<% } %>
+				<p class="card-text"><%= `${post.avgRating} star${post.avgRating === 1 ? '' : 's'}` %></p>
+				<p><%= `${post.reviews.length} review${post.reviews.length === 1 ? '' : 's'} ` %></p>
+
+			<% if(post.location){ %>
+				<p><%= post.location %></p>
+			<% } %>
+			
+				<a href="/posts/<%= post.id %>" class="btn btn-primary">View more</a>
+				</div>
+			</div>
+		</div>
+		<% }); %>
+	</div>
+	<% include ../partials/paginatePosts %>
+</div>
 
 <script>
 	mapboxgl.accessToken = "<%= mapBoxToken %>";

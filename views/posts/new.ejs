@@ -1,14 +1,322 @@
 <% layout('layouts/boilerplate') -%>
-<h1>New Post!</h1>
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-3"></div>
+		<div class="col-6 form-group">
+			<h1>New Post!</h1>
 
-<form action="/posts" method="POST" enctype="multipart/form-data">
-	<div><input type="text" name="post[title]" placeholder="Title"></div>
-	<div><input type="number" name="post[price]" step=".01" placeholder="Price"></div>
-	<div>
-		<input type="file" accept="images/*" name="images" multiple />
+			<form action="/posts" method="POST" enctype="multipart/form-data">
+				<div class="form-group"><label>Is this business exclusively online?</br>
+					<input class="form-check-input onlineOnly" type="radio" name="post[onlineOnly]" value="yes"> Yes<br>
+					<input class="form-check-input onlineOnly" type="radio" name="post[onlineOnly]" value="no"> No<br>
+					</label>
+				</div>
+					
+				<div class="form-group"><label>Is this a lounge or bar?</br>
+					<input class="form-check-input isSocial" type="radio" name="post[isSocial]" value="yes"> Yes<br>
+					<input class="form-check-input isSocial" type="radio" name="post[isSocial]" value="no"> No<br>
+					</label>
+				</div>
+				
+				<div class="form-group"><label>Name of Business</br>
+					<input class="form-control" type="text" name="post[title]" placeholder="Title" required>
+					</label>
+				</div>
+
+				<div class="form-group">
+					<label for="ownerEmail">Is there a business owner? Enter owner's email below:</label>	
+					<input class="form-control"  type="email" name="post[businessOwnerEmail]" placeholder="Business owner's email">
+				</div>
+
+				<div class="form-group"><label>Price</br>
+					<input class="form-control coverInput" type="number" name="post[price]" step="1.00" placeholder="Price">
+					</label>
+				</div>
+
+				<div class="form-group">
+					<label for="images">Choose four images: </label>
+					<input class="form-control" type="file" id="images" accept="images/*" name="images" multiple />
+				</div>
+
+				<div class="form-group music"><label>Music</br>
+					<input class="form-control musicInput" type="text" name="post[music]" placeholder="music: hip-hop, afro-beat, R&B">
+					</label>
+				</div>
+
+				<div class="form-group"><label>Phone<br>
+					<input class="form-control" type="text" name="post[phone]" placeholder="Phone">
+					</label>
+				</div>
+
+				<div class="form-group crowd"><label>Crowd</br>
+					<input class="form-control crowdInput" type="text" name="post[crowd]" placeholder="Crowd">
+				 </label>
+				</div>
+				
+				<div class="form-group"><label>Web Address</br>
+					<input class="form-control" type="text"  name="post[website]" placeholder="Web Address">
+					</label>
+				</div>
+
+				
+				<div class="form-group categories"><label>Categories</br>
+					<input class="form-control categInput" type="text" name="post[categories]" placeholder="Categories">
+					</label>
+				</div>
+				<div class="form-group"><label>Description</br>
+					<textarea name="post[description]" placeholder="Description"></textarea>
+					</label>
+				</div>
+				<div class="form-group"><label>Location</br>
+					<input class="form-control locationInput" type="text" name="post[location]" placeholder="Location">
+					</label>
+				</div>
+				<div id="output"></div>
+				<div class="row">
+					<fieldset class="companyHours">
+						
+					<div class="col-12">
+						
+						<select id='day' >
+							<option value="Mon ">Mon </option>
+							<option value="Tue ">Tue </option>
+							<option value="Wed ">Wed </option>
+							<option value="Thu ">Thu </option>
+							<option value="Fri ">Fri </option>
+							<option value="Sat ">Sat </option>
+							<option value="Sun ">Sun </option>
+						</select>
+				
+						<select id='hourStart' >
+						<option value="12:00 am">12:00 am (midnight)</option>
+					
+							<option value="12:30 am">12:30 am</option>
+
+							<option value="1:00 am">1:00 am</option>
+
+							<option value="1:30 am">1:30 am</option>
+
+							<option value="2:00 am">2:00 am</option>
+
+							<option value="2:30 am">2:30 am</option>
+
+							<option value="3:00 am">3:00 am</option>
+
+							<option value="3:30 am">3:30 am</option>
+
+							<option value="4:00 am">4:00 am</option>
+
+							<option value="4:30 am">4:30 am</option>
+
+							<option value="5:00 am">5:00 am</option>
+
+							<option value="5:30 am">5:30 am</option>
+
+							<option value="6:00 am">6:00 am</option>
+
+							<option value="6:30 am">6:30 am</option>
+
+							<option value="7:00 am">7:00 am</option>
+
+							<option value="7:30 am">7:30 am</option>
+
+							<option value="8:00 am">8:00 am</option>
+
+							<option value="8:30 am">8:30 am</option>
+
+							<option value="9:00 am">9:00 am</option>
+
+							<option value="9:30 am">9:30 am</option>
+
+							<option value="10:00 am">10:00 am</option>
+
+							<option value="10:30 am">10:30 am</option>
+
+							<option value="11:00 am">11:00 am</option>
+
+							<option value="11:30 am">11:30 am</option>
+
+							<option value="12:00 pm">12:00 pm(noon)</option>
+
+							<option value="12:30 pm">12:30 pm</option>
+
+							<option value="1:00 pm">1:00 pm</option>
+
+							<option value="1:30 pm">1:30 pm</option>
+
+							<option value="2:00 pm">2:00 pm</option>
+
+							<option value="2:30 pm">2:30 pm</option>
+
+							<option value="3:00 pm">3:00 pm</option>
+
+							<option value="3:30 pm">3:30 pm</option>
+
+							<option value="4:00 pm">4:00 pm</option>
+
+							<option value="4:30 pm">4:30 pm</option>
+
+							<option value="5:00 pm">5:00 pm</option>
+
+							<option value="5:30 pm">5:30 pm</option>
+
+							<option value="6:00 pm">6:00 pm</option>
+
+							<option value="6:30 pm">6:30 pm</option>
+
+							<option value="7:00 pm">7:00 pm</option>
+
+							<option value="7:30 pm">7:30 pm</option>
+
+							<option value="8:00 pm">8:00 pm</option>
+
+							<option value="8:30 pm">8:30 pm</option>
+
+							<option value="9:00 pm">9:00 pm</option>
+
+							<option value="9:30 pm">9:30 pm</option>
+
+							<option value="10:00 pm">10:00 pm</option>
+
+							<option value="10:30 pm">10:30 pm</option>
+
+							<option value="11:00 pm">11:00 pm</option>
+
+							<option value="11:30 pm">11:30 pm</option>
+						</select>
+
+						<select  id='hourEnd'>
+						<option value="12:00 pm">12:00 pm (noon)</option>
+						<option value="12:30 pm">12:30 pm</option>
+							<option value="1:00 am">1:00 am</option>
+
+							<option value="1:30 am">1:30 am</option>
+
+							<option value="2:00 am">2:00 am</option>
+
+							<option value="2:30 am">2:30 am</option>
+
+							<option value="3:00 am">3:00 am</option>
+
+							<option value="3:30 am">3:30 am</option>
+
+							<option value="4:00 am">4:00 am</option>
+
+							<option value="4:30 am">4:30 am</option>
+
+							<option value="5:00 am">5:00 am</option>
+
+							<option value="5:30 am">5:30 am</option>
+
+							<option value="6:00 am">6:00 am</option>
+
+							<option value="6:30 am">6:30 am</option>
+
+							<option value="7:00 am">7:00 am</option>
+
+							<option value="7:30 am">7:30 am</option>
+
+							<option value="8:00 am">8:00 am</option>
+
+							<option value="8:30 am">8:30 am</option>
+
+							<option value="9:00 am">9:00 am</option>
+
+							<option value="9:30 am">9:30 am</option>
+
+							<option value="10:00 am">10:00 am</option>
+
+							<option value="10:30 am">10:30 am</option>
+
+							<option value="11:00 am">11:00 am</option>
+
+							<option value="11:30 am">11:30 am</option>
+
+							<option value="12:00 pm">12:00 pm(noon)</option>
+
+							<option value="12:30 pm">12:30 pm</option>
+
+							<option value="1:00 pm">1:00 pm</option>
+
+							<option value="1:30 pm">1:30 pm</option>
+
+							<option value="2:00 pm">2:00 pm</option>
+
+							<option value="2:30 pm">2:30 pm</option>
+
+							<option value="3:00 pm">3:00 pm</option>
+
+							<option value="3:30 pm">3:30 pm</option>
+
+							<option value="4:00 pm">4:00 pm</option>
+
+							<option value="4:30 pm">4:30 pm</option>
+
+							<option value="5:00 pm">5:00 pm</option>
+
+							<option value="5:30 pm">5:30 pm</option>
+
+							<option value="6:00 pm">6:00 pm</option>
+
+							<option value="6:30 pm">6:30 pm</option>
+
+							<option value="7:00 pm">7:00 pm</option>
+
+							<option value="7:30 pm">7:30 pm</option>
+
+							<option value="8:00 pm">8:00 pm</option>
+
+							<option value="8:30 pm">8:30 pm</option>
+
+							<option value="9:00 pm">9:00 pm</option>
+
+							<option value="9:30 pm">9:30 pm</option>
+
+							<option value="10:00 pm">10:00 pm</option>
+
+							<option value="10:30 pm">10:30 pm</option>
+
+							<option value="11:00 pm">11:00 pm</option>
+
+							<option value="11:30 pm">11:30 pm</option>
+
+							<option value="12:00 am">12:00 am (next day)</option>
+
+							<option value="12:30 am">12:30 am (next day)</option>
+
+							<option value="1:00 am">1:00 am (next day)</option>
+
+							<option value="1:30 am">1:30 am (next day)</option>
+
+							<option value="2:00 am">2:00 am (next day)</option>
+
+							<option value="2:30 am">2:30 am (next day)</option>
+
+							<option value="3:00 am">3:00 am (next day)</option>
+
+							<option value="3:30 am">3:30 am (next day)</option>
+
+							<option value="4:00 am">4:00 am (next day)</option>
+
+							<option value="4:30 am">4:30 am (next day)</option>
+
+							<option value="5:00 am">5:00 am (next day)</option>
+
+							<option value="5:30 am">5:30 am (next day)</option>
+
+							<option value="6:00 am">6:00 am (next day)</option>
+						</select>
+					
+						<button id="addHours" type="button" value="submit" >Add Hours</button>
+					
+					</div>
+				</fieldset>
+					</div>
+
+				<input class="btn btn-primary mb-2" id="submitForm" type="submit">
+			</form>
+		</div>
+		<div class="col-3"></div>
+		
 	</div>
-	<div><textarea name="post[description]" placeholder="Description"></textarea></div>
-	<div><input type="text" name="post[location]" placeholder="Location"></div>
-
-	<input type="submit">
-</form>
+</div>

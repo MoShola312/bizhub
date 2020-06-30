@@ -1,11 +1,18 @@
 mapboxgl.accessToken = mapBoxToken;
 
-var map = new mapboxgl.Map({
+
+// console.log(hours);
+
+//hides the reply form when the page loads
+$('.reply-form').hide();
+
+if(post.location){
+  var map = new mapboxgl.Map({
   container: 'map',
   style: 'mapbox://styles/mapbox/light-v9',
   center: post.geometry.coordinates,
   zoom: 5
-});
+  });
 
 // create a HTML element for our post location/marker
 var el = document.createElement('div');
@@ -17,6 +24,7 @@ new mapboxgl.Marker(el)
 .setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups
 .setHTML('<h3>' + post.title + '</h3><p>' + post.location + '</p>'))
 .addTo(map);
+}
 
 // Toggle edit review form
 $('.toggle-edit-form').on('click', function() {
@@ -31,13 +39,10 @@ $('.clear-rating').click(function() {
 	$(this).siblings('.input-no-rate').click();
 });
 
-
-
-
-
-
-
-
-
-
-
+//Shows the reply form
+$('.toggle-reply-form').on('click', function(){
+  // toggle the reply button text on click
+  $(this).text() === 'REPLY' ? $(this).text('CANCEL') : $(this).text('REPLY');
+  // toggle visibility of the reply form
+  $(this).siblings('.reply-form').toggle(); 
+});

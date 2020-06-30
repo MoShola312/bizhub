@@ -1,0 +1,25 @@
+<% layout('layouts/boilerplate') -%>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-3"></div>
+            <div class="col-3 form-group">
+                <h1>Reset Password</h1>
+
+                <form action="/reset/<%= token %>?_method=PUT" method="POST">
+                <div>
+                    <label for="password">New Password</label>
+                    <input type="password" id="email" name="password" placeholder="New password" autofocus>
+                </div>
+                <div>
+                    <label for="confirm">Confirm Password</label>
+                    <input type="password" id="confirm" name="confirm" placeholder="Confirm password">
+                </div>
+                <div>
+                    <input class="btn btn-primary mb-2" type="submit" value="Update Password">
+                </div>
+                </form>
+            </div>
+        <div class="col-3"></div>
+        <div class="col-3"></div>
+    </div>
+</div>

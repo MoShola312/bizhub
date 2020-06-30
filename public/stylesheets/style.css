@@ -1,12 +1,10 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+.logo {
+	color: #fff
 }
 
-a {
-  color: #00B7FF;
+.logo:hover {
+	color: #fff
 }
-
 #map {
 	width: 100%;
 	height: 500px;
@@ -27,13 +25,99 @@ a {
 
 .profile-image {
 	width: 100px;
-	border-radius: 50%;
+	border-radius: 5%;
+	margin-right: 20px;
+}
+/* #coverIMG {
+	color:rgb(0,0,255); opacity:0.6;
+	background-size: cover;
+} */
+
+.profile-show-image {
+	width: 50px;
+	border-radius: 6%;
+	margin-right: 20px;
+}
+
+.reply-profile-show-image {
+	width: 30px;
+	border-radius: 6%;
+	margin-right: 20px;
 }
 
 
+.jumbotron {
+	height: 600px;
+	
+}
+/* #img {
+	background-image: url(https://res.cloudinary.com/dnrh8742s/image/upload/b_rgb:090909,co_rgb:131212,o_43/v1555098939/cover2_2.jpg);
+	height: 600px;
+	position: relative;
+	top: -14%;
+	color:black; opacity:0.6; 
+	background-repeat: no-repeat;
+	background-size: cover;
+	z-index: 0;
+
+} */
 
 
 
+/* .container{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	color: white;
+	z-index: 1;
+	
+} */
+.card-img-top {
+    width: 100%;
+    height: 20vh;
+    object-fit: cover;
+}
 
+.review-div {
+	background-color: gainsboro;
+}
 
+.hyperlink-btn, .remove-hours{
+	font-size: small;
+	color: blue;
+}
 
+.display-hours span:first-child {
+	padding-right: 3em;
+} 
+
+.categories {
+	margin-right: 2px;
+}
+
+#addCategory, .categInput, .crowdInput, .musicInput{
+	margin-bottom: 1em;
+}
+
+#addCategoryDiv, #addMusicDiv, #addCrowdDiv{
+	margin-bottom: 2em;
+}
+.display-hours span {
+	margin-right: 1em;
+}
+
+.day{
+	font-weight: bold;
+}
+.fa-star, .fa-star-half-alt {
+	color: red;
+}
+
+label {
+	font-weight: bold;
+ }
+ 
+ body {
+	color: black
+}

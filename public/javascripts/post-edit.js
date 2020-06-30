@@ -20,3 +20,4 @@ postEditForm.addEventListener('submit', function(event) {
 		alert(`You need to remove at least ${removalAmt} (more) image${removalAmt === 1 ? '' : 's'}!`);
 	}
 });
+

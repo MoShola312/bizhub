@@ -1,25 +1,58 @@
-<style>
-	ul {
-		list-style-type: none;
-		margin: 0;
-		padding: 0;
-	}
-	li {
-		display: inline;
-		padding: 5px;
-	}
-</style>
-
-<ul id="navbar">
-	<li><a href="/">Home</a></li>
-	<li><a href="/posts">Posts</a></li>
-	<% if(!currentUser) { %>
-	<li><a href="/register">Register</a></li>
-	<li><a href="/login">Login</a></li>
-	<% } else { %>
-	<li><a href="/posts/new">New Post</a></li>
-	<li><a href="/profile">Profile</a></li>
-	<li><a href="/logout">Logout</a></li>
-	Welcome, <%= currentUser.username %>!
-	<% } %>
-</ul>
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark mb-4 ">
+		<a class="navbar-brand" href="#">Surf Shop</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#h6-info" aria-controls="h6-info" aria-expanded="false" aria-label="Toggle navigation"><span class="ti-menu"></span></button>
+		<div class="collapse navbar-collapse hover-dropdown font-14 ml-auto" id="h6-info">
+                <ul class="navbar-nav ml-auto">
+                <li class="nav-item"> 
+                    <a class="nav-link" href="/">
+                    Home
+                    </a>
+                </li>
+                <li class="nav-item"> 
+                    <a class="nav-link" href="/posts">
+                    Posts
+                    </a>
+                </li>
+                <li class="nav-item"> 
+                    <a class="nav-link" href="/new-biz">
+                    Add a Business
+                    </a>
+                </li>
+                <% if(currentUser) { %>
+                    <% if(currentUser && currentUser.isAdmin) { %>
+                    <li class="nav-item"> 
+                        <a class="nav-link" href="/posts/new">
+                        Admin New Post
+                        </a>
+                    </li>
+                    <%}%>
+                    <li class="nav-item"> 
+                        <a class="nav-link" href="/profile/<%=currentUser.id %>">
+                        Profile
+                        </a>
+                    </li>
+                    <li class="nav-item"> 
+                        <a class="nav-link" href="/logout">
+                        Logout
+                        </a>
+                    </li>
+                <% } else { %>
+                    <li class="nav-item"> 
+                        <a class="nav-link" href="/register">
+                        Register
+                        </a>
+                    </li>
+                    <li class="nav-item"> 
+                        <a class="nav-link" href="/login">
+                        Login
+                        </a>
+                    </li>
+                <% } %>
+                </ul>
+                <% if(currentUser) { %>
+                <div class="act-buttons">
+                <a href="#" class="btn btn-danger-gradiant font-14">Welcome, <%= currentUser.username %>!</a>
+                </div>
+                <% } %>
+            </div>
+</nav>

@@ -15,7 +15,7 @@ async function geocoder(location) {
 		console.log(response.body.features[0].geometry.coordinates);
 	} catch(err) {
 		console.log(err.message);
-	}
+	}	
 }
 
 geocoder('Alaska, US');

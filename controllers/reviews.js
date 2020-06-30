@@ -18,6 +18,7 @@ module.exports = {
 			req.session.error = 'Sorry, you can only create one review per post.';
 			return res.redirect(`/posts/${post.id}`);
 		}
+
 		// create the review
 		req.body.review.author = req.user._id;
 		let review = await Review.create(req.body.review);
@@ -34,16 +35,46 @@ module.exports = {
 		await Review.findByIdAndUpdate(req.params.review_id, req.body.review);
 		req.session.success = 'Review updated successfully!';
 		res.redirect(`/posts/${req.params.id}`);
-		console.log("req.params " + req.params)
+	
 	},
 	// Reviews Destroy
 	async reviewDestroy(req, res, next) {
 		await Post.findByIdAndUpdate(req.params.id, {
-			$pull: { reviews: req.params.review_id }
+			$pull: { reviews: req.params.review_id 
+			}, 
 		});
-		await Review.findByIdAndRemove(req.params.review_id);
+		
+		// await Review.findByIdAndRemove(req.params.review_id);
+		let review = await Review.findById(req.params.review_id);
+		await review.remove();
 		req.session.success = 'Review deleted successfully!';
 		res.redirect(`/posts/${req.params.id}`);
+	},
+	async likeCreate(req, res, next){
+		let review = await Review.findById(req.params.review_id);
+        const foundUserLike = review.likes.some(function (like) {
+            return like.equals(req.user._id);
+        });
+
+        if (foundUserLike) {
+            // user already liked, removing like
+            review.likes.pull(req.user._id);
+        } else {
+            // adding the new user like
+            review.likes.push(req.user);
+        }
+
+
+		await review.save()
+        // foundReview.save(function (err) {
+        //     if (err) {
+        //         console.log(err);
+        //         return res.redirect("/posts");
+        //     }
+        //     return res.redirect(`/posts/${foundReview._id}`);
+        // });
+		res.redirect(`/posts/${req.params.id}`);
+		
 	}
 }
 

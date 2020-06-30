@@ -7,23 +7,41 @@ const PostSchema = new Schema({
 	title: String,
 	price: String,
 	description: String,
-	images: [ { url: String, public_id: String } ],
+	images: [ { url: { type: String,
+		default: '/images/default-post.png' 
+	}, 
+				public_id: String,  
+			} ],
 	location: String,
 	geometry: {
 		type: {
 			type: String,
 			enum: ['Point'],
-			required: true
+			// required: true
 		},
 		coordinates: {
 			type: [Number],
-			required: true
+			// required: true
 		}
 	},
 	properties: {
 		description: String
 	},
+	website: String,
+	phone: String,
+	// hours: [{day:String, hourStart: String, hourEnd: String}],
+	hours: [String],
+	categories: [String],
+	music: [String],
+	// crowd: {crowdOne: String, crowdTwo: String, crowdThree: String,  },
+	crowd: [String],
 	author: {
+		type: Schema.Types.ObjectId,
+		ref: 'User'
+	},
+	isSocial: String,
+	onlineOnly: String,
+	owner: {
 		type: Schema.Types.ObjectId,
 		ref: 'User'
 	},
@@ -59,6 +77,9 @@ PostSchema.methods.calculateAvgRating = function() {
 	return floorRating;
 }
 
+
 PostSchema.plugin(mongoosePaginate);
+
+PostSchema.index({ geometry: '2dsphere' });
 
 module.exports = mongoose.model('Post', PostSchema);
