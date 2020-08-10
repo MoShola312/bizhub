@@ -122,20 +122,36 @@ module.exports = {
 	},
 	// Posts Show
 	async postShow(req, res, next) {
+		// let post = await Post.findById(req.params.id).populate({
+		// 	path: 'reviews',
+		// 	options: { sort: { '_id': -1 } },
+		// 	populate: {
+		// 		path: 'author',
+		// 		model: 'User',
+				
+		// 	}	
+		// }).populate({
+		// 	path: 'owner'
+		// })
+
+		// let reviewReply = await Review.find(req.params.review_id).populate({
+		// 	path: 'replies', 
+		// 	populate: {
+		// 		path: 'author',
+		// 		model: 'User',
+		// 	},
+		// })
 		let post = await Post.findById(req.params.id).populate({
-			path: 'reviews',
+			path: 'reviews owner',
 			options: { sort: { '_id': -1 } },
 			populate: {
 				path: 'author',
 				model: 'User',
-				
 			}	
-		}).populate({
-			path: 'owner'
 		})
 
 		let reviewReply = await Review.find(req.params.review_id).populate({
-			path: 'replies',
+			path: 'replies likes', 
 			populate: {
 				path: 'author',
 				model: 'User',

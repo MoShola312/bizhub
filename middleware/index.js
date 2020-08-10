@@ -57,6 +57,29 @@ const middleware = {
 		}
 		return next();
 },
+reqBodySanitizer: (req, res, next) => {
+	//sanitizer
+	for(let key in req.body){
+		
+		req.body[key] = req.sanitize(req.body[key])
+		// console.log(key + "  " + req.body.post[key])
+		// res.locals[key] = req.body.post[key]
+
+	}
+	if (req.body.categories) {
+		req.body.categories = req.body.categories.split(',')
+	}
+	if (req.body.music){
+		req.body.music = req.body.music.split(',')
+	}
+	if (req.body.crowd){
+		req.body.crowd = req.body.crowd.split(',')
+	} 
+	if (req.body.hours){
+		req.body.hours = req.body.hours.split(',')	
+	}
+	return next();
+},
 	isLoggedIn: (req, res, next) => {
 		if (req.isAuthenticated()) return next();
 		req.session.error = 'You need to be logged in to do that!';

@@ -22,6 +22,13 @@ module.exports = {
 		// create the review
 		req.body.review.author = req.user._id;
 		let review = await Review.create(req.body.review);
+		
+		// if(req.xhr) {
+		// 	res.json(review);
+		// }
+		
+
+
 		// assign review to post
 		post.reviews.push(review);
 		// save the post
@@ -64,16 +71,17 @@ module.exports = {
             review.likes.push(req.user);
         }
 
-
+		
 		await review.save()
-        // foundReview.save(function (err) {
-        //     if (err) {
-        //         console.log(err);
-        //         return res.redirect("/posts");
-        //     }
-        //     return res.redirect(`/posts/${foundReview._id}`);
-        // });
+        
+		
+		// if(err){
+		// console.log(err);
 		res.redirect(`/posts/${req.params.id}`);
+		// } else {
+		// 	res.json(review);
+		// }
+		
 		
 	}
 }

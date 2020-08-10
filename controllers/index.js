@@ -38,7 +38,7 @@ module.exports = {
 			//turns all usernames to lowercase
 			newUser.username = req.body.username.toLowerCase();
 			// capitalize the first letter of usernames
-			newUser.username = newUser.username.charAt(0).toUpperCase() + newUser.username.slice(1);
+			// newUser.username = newUser.username.charAt(0).toUpperCase() + newUser.username.slice(1);
 			
 			const user = await User.register(newUser, req.body.password);
 			

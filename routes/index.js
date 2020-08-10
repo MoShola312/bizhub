@@ -23,6 +23,7 @@ const {
 	asyncErrorHandler,
 	isLoggedIn,
 	postSanitizer,
+	reqBodySanitizer,
 	isValidPassword,
 	changePassword
 } = require('../middleware')
@@ -46,7 +47,7 @@ router.post('/login', asyncErrorHandler(postLogin));
 router.get('/new-biz', isLoggedIn, getNewBiz);
 
 /* POST posts new /posts/new */
-router.post('/new-biz', asyncErrorHandler(postSanitizer), asyncErrorHandler(postNewBiz));
+router.post('/new-biz', asyncErrorHandler(reqBodySanitizer), asyncErrorHandler(postNewBiz));
 
 /* GET /logout */
 router.get('/logout', getLogout);
