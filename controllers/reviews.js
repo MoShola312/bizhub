@@ -1,5 +1,6 @@
 const Post = require('../models/post');
 const Review = require('../models/review');
+const user = require('../models/user');
 
 
 module.exports = {
@@ -21,21 +22,20 @@ module.exports = {
 
 		// create the review
 		req.body.review.author = req.user._id;
+	
 		let review = await Review.create(req.body.review);
-		
-		// if(req.xhr) {
-		// 	res.json(review);
-		// }
-		
-
-
+		review = await review.populate('author').execPopulate()
 		// assign review to post
 		post.reviews.push(review);
 		// save the post
 		post.save();
 		// redirect to the post
 		req.session.success = 'Review created successfully!';
+	// 	if(req.xhr) {
+	// 	res.json(review);
+	// } else {
 		res.redirect(`/posts/${post.id}`);
+	// }
 	},
 	// Reviews Update
 	async reviewUpdate(req, res, next) {
@@ -58,7 +58,7 @@ module.exports = {
 		res.redirect(`/posts/${req.params.id}`);
 	},
 	async likeCreate(req, res, next){
-		let review = await Review.findById(req.params.review_id);
+		let review = await Review.findById(req.params.review_id).populate('likes').exec();
         const foundUserLike = review.likes.some(function (like) {
             return like.equals(req.user._id);
         });
@@ -75,14 +75,14 @@ module.exports = {
 		await review.save()
         
 		
-		// if(err){
-		// console.log(err);
-		res.redirect(`/posts/${req.params.id}`);
-		// } else {
-		// 	res.json(review);
-		// }
-		
-		
+		if(req.xhr) {
+			res.json({"review" : review,
+					"foundUserLike": foundUserLike
+			})
+		} else {
+			res.redirect(`/posts/${req.params.id}`);	
+		}
+	
 	}
 }
 

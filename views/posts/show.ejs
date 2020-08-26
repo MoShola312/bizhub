@@ -156,6 +156,7 @@
 <% post.reviews.forEach(function(review) { %>
 <div class="row">
 	<div class="col-2"></div>
+	<!-- <p id="append-review"></p> -->
 	<div class="col-1">
 		<a href="/profile/<%=review.author.id %>"><img src="<%= review.author.image.secure_url %>" class="profile-show-image mr-2">
 			<%= review.author.username %></a>
@@ -168,16 +169,16 @@
 		<br><%= review.body %></p>
 		<!-- like button -->
 		<div style="padding-bottom: 10px;">
-			<form action="/posts/<%= post.id %>/reviews/<%= review.id %>/like" method="POST">
-				<div class="btn-group">
+			<form action="/posts/<%= post.id %>/reviews/<%= review.id %>/like" method="POST" id="likeForm">
+				<div class="btn-group" id="likesDiv">
 					<% if (currentUser && review.likes.some(function (like) { 
 						return like.equals(currentUser._id)
 					 })) { %>
-						<button class="btn btn-sm btn-primary">
+						<button class="btn btn-sm btn-primary likedBtn1">
 							<i class="fas fa-thumbs-up"></i> Liked (<%= review.likes.length %>)
 						</button>
 					<% } else { %>
-						<button class="btn btn-secondary btn-sm">
+						<button class="btn btn-secondary btn-sm likedBtn1">
 							<i class="fas fa-thumbs-up"></i> Like (<%= review.likes.length %>)
 						</button>
 					<% } %>
@@ -248,17 +249,19 @@
 					<div class="col-3"></div>	
 					<div class="col-5 reply-body">
 						<!-- gives the owner a checkmark and identifies them -->
-						<% if(post.owner.equals(reply.author)){ %>
+						<% if(post.owner.equals(reply.author)&&(!post.owner.isAdmin)){ %>
 							<p><a href="/profile/<%=reply.author.id %>"><img src="<%= reply.author.image.secure_url %>" class="reply-profile-show-image mr-2"><strong><%= reply.author.username %></strong>
 								<i class="far fa-check-circle"></i></a> owner of <strong><%= post.title %></strong>
 							<br><span><%= moment(reply.createdAt).fromNow()%> - <%= reply.body %></span> </p>
-						<%} else {%>
-							<p><a href="/profile/<%=reply.author.id %>"><img src="<%= reply.author.image.secure_url %>" class="reply-profile-show-image mr-2"><strong><%= reply.author.username %></strong></a> 
-							<br><span><%= moment(reply.createdAt).fromNow()%> - <%= reply.body %></span> </p>
+							<%} else if(reply.author.isAdmin){ %>
+								<p><a href="/profile/<%=reply.author.id %>"><img src="<%= reply.author.image.secure_url %>" class="reply-profile-show-image mr-2"><strong><%= reply.author.username %></strong>
+									<i class="fas fa-user-check">Admin</i></a>
+								<br><span><%= moment(reply.createdAt).fromNow()%> - <%= reply.body %></span> </p>
+							<%} else {%>
+								<p><a href="/profile/<%=reply.author.id %>"><img src="<%= reply.author.image.secure_url %>" class="reply-profile-show-image mr-2"><strong><%= reply.author.username %></strong></a> 
+								<br><span><%= moment(reply.createdAt).fromNow()%> - <%= reply.body %></span> </p>
 						<%}%>
-						
 					</div>
-
 					<!-- update a reply -->
 					<% if(currentUser && reply.author.equals(currentUser._id) || currentUser && currentUser.isAdmin) { %>
 						<div class="form-group col-4">

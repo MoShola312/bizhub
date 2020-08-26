@@ -22,7 +22,6 @@ const {
 const {
 	asyncErrorHandler,
 	isLoggedIn,
-	postSanitizer,
 	reqBodySanitizer,
 	isValidPassword,
 	changePassword
@@ -35,7 +34,7 @@ router.get('/', asyncErrorHandler(landingPage));
 router.get('/register', getRegister);
 
 /* POST /register */
-router.post('/register', upload.single('image'), asyncErrorHandler(postRegister));
+router.post('/register', upload.single('image'), asyncErrorHandler(reqBodySanitizer), asyncErrorHandler(postRegister));
 
 /* GET /login */
 router.get('/login', getLogin);
@@ -53,7 +52,7 @@ router.post('/new-biz', asyncErrorHandler(reqBodySanitizer), asyncErrorHandler(p
 router.get('/logout', getLogout);
 
 /* GET /profile */
-router.get('/profile/:id', isLoggedIn, asyncErrorHandler(getProfile));
+router.get('/profile/:id', isLoggedIn,  asyncErrorHandler(getProfile));
 
 /* PUT /profile */
 router.put('/profile',

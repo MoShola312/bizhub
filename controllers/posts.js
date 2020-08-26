@@ -151,14 +151,14 @@ module.exports = {
 		})
 
 		let reviewReply = await Review.find(req.params.review_id).populate({
-			path: 'replies likes', 
+			path: 'replies', 
 			populate: {
 				path: 'author',
 				model: 'User',
 			},
 		})
 
-		console.log('controllers/post.js : ' + post)
+		// console.log('controllers/post.js : ' + post)
 
 		const floorRating = post.calculateAvgRating();
 		let mapBoxToken = process.env.MAPBOX_TOKEN;
