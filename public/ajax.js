@@ -1,5 +1,5 @@
 //like button
-$('#likeForm').submit(function(e){
+$('.likeForm').on('submit', function(e){
     e.preventDefault();
     let actionUrl = $(this).attr('action')
     console.log(`url: ${actionUrl}`)
@@ -11,23 +11,27 @@ $.ajax({
     
     success: function(response) {
 		
-		// console.log(`response: ${response}`)
+		console.log(response)
 		// console.log(`review.like: ${response.review.likes.length}`)
 		// console.log(`founduser: ${response.foundUserLike}`)
 	   
 		//if foundUserLike is "true", unlike the button, pull LIKE
-     if (response.foundUserLike) { 
-		$('.likedBtn1').attr('class', 'btn btn-sm btn-secondary likedBtn1').html(`<i class="fas fa-thumbs-up"></i> Like (${response.review.likes.length})`)
-		
-	 } else {
-		//foundUserLike is "false" means user didn't LIKE it yet, like the button, add LIKE
-		//change the class of the button
-		//change the icon text of the font awesome
-		$('.likedBtn1').attr('class', 'btn btn-sm btn-primary likedBtn1').html(`<i class="fas fa-thumbs-up"></i> Liked (${response.review.likes.length})`)
 
-		 }
-        
-	}})
+		
+		if (response.foundUserLike) { 
+			console.log(`founduser:  ${response.foundUserLike}`)
+			$("#" + response.review._id).attr('class', 'btn btn-sm btn-secondary likedBtn1').html(`<i class="fas fa-thumbs-up"></i> Like (${response.review.likes.length})`)
+			$("#" + response.review._id).blur()
+		} else {
+			console.log(`else founduser:  ${response.foundUserLike}`)
+			//foundUserLike is "false" means user didn't LIKE it yet, like the button, add LIKE
+			//change the class of the button
+			//change the icon text of the font awesome
+			$("#" + response.review._id).attr('class', 'btn btn-sm btn-primary likedBtn1').html(`<i class="fas fa-thumbs-up"></i> Liked (${response.review.likes.length})`)
+			}
+			
+	}
+})
 })
 
 // like form
@@ -53,7 +57,7 @@ $.ajax({
 
 
 
-// alert("ajax!")
+
 
 
 // $('#create-review-form').submit(function(e){

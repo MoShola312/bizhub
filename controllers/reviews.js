@@ -70,14 +70,12 @@ module.exports = {
             // adding the new user like
             review.likes.push(req.user);
         }
-
-		
 		await review.save()
-        
 		
 		if(req.xhr) {
-			res.json({"review" : review,
-					"foundUserLike": foundUserLike
+			res.json({
+				"review" : review,
+				"foundUserLike": foundUserLike
 			})
 		} else {
 			res.redirect(`/posts/${req.params.id}`);	
