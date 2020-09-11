@@ -10,7 +10,7 @@ module.exports = {
 		let post = await Post.findById(req.params.id).populate('reviews').exec();
 		
 		// find the reviw by its id
-		// let review = await Review.findById(req.params.review_id).populate('replies').exec();
+		let review = await Review.findById(req.params.review_id).populate('replies').exec();
 		// console.log("replies.js review: " + review)
 		// console.log("replies.js review params: " + req.params.review_id)
 		
@@ -20,13 +20,13 @@ module.exports = {
 		// create the reply
 		let reply = await Reply.create(req.body.reply);
 		// assign reply to review
-		post.reviews.push(reply);
+		review.replies.push(reply);
 		
 	
 		
 		// save the review
-		// review.save();
-		post.save();
+		review.save();
+		// post.save();
 		// reply.save();
 		
 		// redirect to the post

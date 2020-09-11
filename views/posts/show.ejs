@@ -154,6 +154,8 @@
 
 <!-- display all reviews -->
 <% post.reviews.forEach(function(review) { %>
+	
+	
 <div class="row">
 	<div class="col-2"></div>
 	<!-- <p id="append-review"></p> -->
@@ -242,8 +244,7 @@
 	<!-- display replies -->
 	<%	reviewReply.forEach(function(key){ %>
 		<!-- if post.review id matches the reviewReply id, display the reply -->
-		<% if(review.id===key.id){ %>
-			
+		<% if(review.id===key.id){ %>	
 				<%	key.replies.forEach(function(reply){ %>
 				<div class="row">
 					<div class="col-3"></div>	
