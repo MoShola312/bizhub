@@ -171,17 +171,17 @@
 		<div style="padding-bottom: 10px;">
 			<form action="/posts/<%= post.id %>/reviews/<%= review.id %>/like" method="POST" class="likeForm">
 				<div class="btn-group" id="likesDiv">
-					<!-- <% if (currentUser && review.likes.some(function (like) { 
+					<% if (currentUser && review.likes.some(function (like) { 
 						return like.equals(currentUser._id)
 					 })) { %>
 						<button class="btn btn-sm btn-primary likedBtn1" id='<%= review.id %>'>
 							<i class="fas fa-thumbs-up" ></i> Liked (<%= review.likes.length %>)
 						</button>
-					<% } else { %> -->
+					<% } else { %>
 						<button class="btn btn-secondary btn-sm likedBtn1" id='<%= review.id %>'>
 							<i class="fas fa-thumbs-up" ></i> Like (<%= review.likes.length %>)
 						</button>
-					<!-- <% } %> -->
+					<% } %>
 
 				</div>
 			</form>
