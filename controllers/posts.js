@@ -5,6 +5,9 @@ const mbxGeocoding = require('@mapbox/mapbox-sdk/services/geocoding');
 const mapBoxToken = process.env.MAPBOX_TOKEN;
 const geocodingClient = mbxGeocoding({ accessToken: mapBoxToken });
 const { cloudinary } = require('../cloudinary');
+const  sortByDay  = require('../public/javascripts/sortDays');
+
+
 
 module.exports = {
 	// Posts Index
@@ -38,10 +41,6 @@ module.exports = {
 		req.body.images = [];
 		// checks if the user uploaded an image
 
-		// console.log("req.files... " + req.files)
-		// console.log("type req.file... " +  typeof req.files)
-		// console.log("req.files.length == [] " + req.files.length == [])
-		
 		if(req.files.length == [])
 		{
 			//default image is placed if the user doesn't upload an image
@@ -58,20 +57,41 @@ module.exports = {
 		//checks if the user enter a location
 		if(req.body.post.location){
 			let response = await geocodingClient
-		  .forwardGeocode({
+		  	.forwardGeocode({
 		    query: req.body.post.location,
 		    limit: 1
-		  })
-		  .send();
-		req.body.post.geometry = response.body.features[0].geometry;
+		 	 })
+		  	.send();
+			req.body.post.geometry = response.body.features[0].geometry;
 		}
 		
+
+		req.body.post.hours = []
+		
+		// console.log(req.body.hours)
+		// console.log(req.body.hours.length)
+
+		
+		//parsing the info from the post-create
+		//pushing info into req.body.post.hours
+	   for(const j in req.body.hours){
+			req.body.post.hours.push(JSON.parse(req.body.hours[j]))
+		}
+
+		// console.log(req.body.post.hours)
+		// console.log(req.body.post.hours.length)
+		
+
+		//sorts the days in order
+		req.body.post.hours.sort(sortByDay)
+
+
 		//assigns the user as the author of the post
 		req.body.post.author = req.user._id;
 
-
+	
 		//adds http to websites if not present
-		if(!req.body.post.website.startsWith('http://')){
+		if(!req.body.post.website.startsWith('http://') && (req.body.post.website)){
 			req.body.post.website = 'http://' + req.body.post.website
 		}
 	
@@ -94,27 +114,13 @@ module.exports = {
 			
 		}
 		
-		//  await User.findOne({ email }, async function(err,foundOwner){
-		// 	 console.log("err:   " + err)
-		// 	if(err == null) {
-		
-		// 		req.body.post.owner = await User.findOne({ isAdmin: 'true' })
-				// console.log('not claimed: ' + req.body.post.owner)
-				
-		// 		req.session.error= 'There is no user with that email or this business was not claimed.'
-		// 		 req.body.post.owner.save()
-		// 	} else {
-		// 		req.body.post.owner = foundOwner;
-		// 		console.log('foundOwner ' + foundOwner)
-		// 	}
-			
-		// })
 		
 
 		let post = new Post(req.body.post);
 	
 		post.properties.description = `<strong><a href="/posts/${post._id}">${post.title}</a></strong><p>${post.location}</p><p>${post.description.substring(0, 20)}...</p>`;
 
+		
 		
 		await post.save();
 		req.session.success = 'Post created successfully!';
@@ -147,7 +153,8 @@ module.exports = {
 			populate: {
 				path: 'author',
 				model: 'User',
-			}	
+				
+			}
 		})
 
 		let reviewReply = await Review.find(req.params.review_id).populate({
@@ -158,7 +165,7 @@ module.exports = {
 			},
 		})
 
-		// console.log('controllers/post.js : ' + post)
+	
 
 		const floorRating = post.calculateAvgRating();
 		let mapBoxToken = process.env.MAPBOX_TOKEN;
@@ -227,7 +234,25 @@ module.exports = {
 		post.isSocial = req.body.post.isSocial;
 		post.onlineOnly= req.body.post.onlineOnly;
 		post.phone = req.body.post.phone;
-		post.hours = req.body.post.hours;
+		
+		// console.log(req.body.hours.length)
+		// console.log(req.body.hours)
+		// console.log(req.body.hours)
+
+
+		//parsing the info from edit
+		//pushing info into postObj
+		let postObj = [];
+		for(const j in req.body.hours){
+			postObj.push(JSON.parse(req.body.hours[j]))
+		}
+		//set info to database values
+		post.hours= postObj
+		
+		//sort days of week in order
+		post.hours.sort(sortByDay)
+		
+
 		post.categories = req.body.post.categories;
 		post.properties.description = `<strong><a href="/posts/${post._id}">${post.title}</a></strong><p>${post.location}</p><p>${post.description.substring(0, 20)}...</p>`;
 
@@ -236,21 +261,24 @@ module.exports = {
 		if(req.body.post.businessOwnerEmail){
 			const email = req.body.post.businessOwnerEmail;
 			const bizOwner2 = await User.findOne({ email })
-			console.log('bizOwner2: ' + bizOwner2)
-		if (bizOwner2){
-			// req.body.post.owner = bizOwner
-			post.owner  = bizOwner2
-			
-		} else {
-			
-			req.session.error= 'There is no user with this email.';
+			// console.log('bizOwner2: ' + bizOwner2)
+			if (bizOwner2){
+				// req.body.post.owner = bizOwner
+				post.owner  = bizOwner2
+				
+			} else {
+				
+				req.session.error= 'There is no user with this email.';
+			}
 		}
-	}
 		
 		//adds http to websites if not present
-		if(!req.body.post.website.startsWith('http://')){
-			post.website = 'http://' + req.body.post.website
+		if(req.body.post.website){
+			if(!req.body.post.website.startsWith('http://')){
+				post.website = 'http://' + req.body.post.website
+			}
 		}
+		
 
 		// save the updated post into the db
 		await post.save();
