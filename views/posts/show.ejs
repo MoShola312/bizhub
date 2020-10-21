@@ -71,7 +71,7 @@
 			<li class="list-group-item">Description: <%= post.description %></li>
 			<% if (post.isSocial==='yes'){%>
 				
-				<li class="list-group-item">Price: <%= post.price %></li>
+				<li class="list-group-item">Cover: <%= post.price %></li>
 				<li class="list-group-item">Music: <%= post.music.join(', ') %></li>
 				<li class="list-group-item">Crowd: <%= post.crowd.join(', ') %></li>
 			<% } %>
@@ -81,34 +81,21 @@
 				<li class="list-group-item">Location: <%= post.location %></li>
 				<li class="list-group-item">Hours:<br>
 				<% post.hours.forEach(function(hour){ %>
-					<% let opening; %>
-					<% let closing; %>
-					<span class='day'><%= day= hour.slice(0,3) %></span> 
-					<% if(hour.includes('Closed')){ %>
-						<span > <%= opening=hour.slice(3) %></span>
-						<span> <%= closing=hour.slice(-1)%></span>
-					<%}  else if (hour.includes('midnight')) { %>
-						<span> <%= opening=hour.slice(3,(hour.indexOf("midnight")-10)) %> - </span>
-						<span> <%= closing=hour.slice(hour.indexOf("midnight") -10) %></span>
-					<% } else  { %>
-					<span> <%= opening=hour.slice(3,(hour.indexOf("m")+1)) %> - </span>
-					<span> <%= closing=hour.slice(hour.indexOf("m") + 1); %></span>
-					<% } %>
+					<span class='day'><%= hour.day %> </span> 
+				    <span> <%= hour.hourStart %> - </span>
+					<span><%= hour.hourEnd %></span>
 					<br>   
 				<% }) %>
 			</li>
 			<%}%>
+			
 			<li class="list-group-item">Categories: <%= post.categories.join(', ') %></li>
 		</div>
 	</div>
 	
 <div class="row">
 	<div class="col-2"></div>
-	<!-- <% if (post.location) { %>
-	<div class="col-6">
-		<div id='map'></div>
-	</div>
-     <% } %> -->
+	
 	<div class="col-2">
 		
 		<% if (currentUser && post.owner.equals(currentUser._id) || currentUser && currentUser.isAdmin) { %>
