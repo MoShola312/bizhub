@@ -29,8 +29,22 @@ const PostSchema = new Schema({
 	},
 	website: String,
 	phone: String,
-	// hours: [{day:String, hourStart: String, hourEnd: String}],
-	hours: [String],
+	hours: [
+		// {
+		// 	day: { type: String} , 
+		// 	hourStart: {type: String} , 
+		// 	hourEnd: {type: String}
+		// }
+	],
+
+	// hours: [
+	// 	{
+	// 		day: String, 
+	// 		hourStart: String, 
+	// 		hourEnd: String
+	// 	}
+	// ],
+	// hours: [String],
 	categories: [String],
 	music: [String],
 	// crowd: {crowdOne: String, crowdTwo: String, crowdThree: String,  },
