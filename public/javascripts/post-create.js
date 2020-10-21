@@ -1,10 +1,13 @@
-
+let storeHours = new Object();
 $('#addHours').on('click', function(){
     //reads the selected day/hours and converts it into texts
 
-    const day = $('#day option:selected').text();
-    const hourStart = $('#hourStart option:selected').text();
-    const hourEnd = $('#hourEnd option:selected').text();
+    const day = $('#day option:selected').val();
+    // let day = $('[name=day] option:selected').text();
+    let hourStart = $('#hourStart option:selected').text();
+    let hourEnd = $('#hourEnd option:selected').text();
+    
+    
     //creates a div call and gives it a class of display-hours
     var div = $('<div/>').attr("class", "display-hours");
     //creates a span and assign it's text the variable day
@@ -13,18 +16,28 @@ $('#addHours').on('click', function(){
     var spanHourStart = $("<span> </span>").text(hourStart);
     var spanDash = $("<span> </span>").text("-");
     var spanHourEnd = $("<span> </span>").text(hourEnd);
+
+    storeHours = {day: day, hourStart: hourStart, hourEnd: hourEnd}
     
-    var input = $('<input>').attr({
+    // console.log(storeHours)
+    
+    let inputData  = $('<input>').attr({
         type: 'hidden', 
-        value: day + hourStart + hourEnd,
-        name: 'post[hours]'
+        // value:  {day: day, hourStart: hourStart, hourEnd: hourEnd},
+        value: JSON.stringify(storeHours),
+        // name: 'bizhours'
+        name: 'hours'
         
     }); 
 
+
+    
     //appends hours/day div to #output
     $('#output').append(div);
-    $(div).append(spanDay, spanHourStart, spanDash, spanHourEnd, remove, input);
+    $(div).append(spanDay, spanHourStart, spanDash, spanHourEnd, remove, inputData);
+    // $(div).append(spanDay, spanHourStart, spanDash, spanHourEnd, remove);
     // removeDiv()
+      
 }); 
    
 //binds to document
