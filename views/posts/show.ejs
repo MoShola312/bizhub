@@ -1,12 +1,12 @@
 <% layout('layouts/post-show-layout') -%>
 <div class="row">
-	<div class="col-lg-12 ">
+	
 		<% post.images.forEach(function(image) { %>
-	
+		<div class="img-div col-lg-3">
 			<a href="#a<%=image._id%>"  role="button" data-toggle="modal">
-				<img src="<%= image.url %>" alt=" " height="260px"> 
-			</a>
-	
+				<img class="thumbnail-img" src="<%= image.url %>" alt=" " height="250px"> 
+			</a>	
+		</div>
 			<!-- Modal -->
 			<div class="modal fade" id="a<%= image._id%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 				<div class="modal-dialog modal-lg" role="document">
@@ -20,14 +20,19 @@
 						<div class="modal-body mx-auto">
 							<img src="<%= image.url %>" alt="">
 						</div>
-						
 					</div>
 				</div>
+			</div>	
+		<% }); %>
+
+		<% if(post.images.length > 3){ %>
+			<div class="overlay">
+				<a href="/posts/<%= post.id %>/biz_photos"><button type="button" class="btn btn-dark"><span>+<%=post.images.length %></span></button></a>
 			</div>
+		<% } %>
 		
-	<% }); %>
-</div>
-</div>
+	</div>
+
 <hr>
 
 <div class="container-fluid">
