@@ -118,6 +118,21 @@ label {
 	font-weight: bold;
  }
  
- body {
+body {
 	color: black
+}
+img {
+	max-width: 700px;
+}
+.thumbnail-img {
+	object-fit: cover;
+	width:430px;
+ 	height:320px;
+
+}
+.thumbnail-gallery {
+	object-fit: cover;
+	width:130px;
+ 	height:130px;
+
 }
