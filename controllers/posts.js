@@ -285,6 +285,13 @@ module.exports = {
 		// redirect to show page
 		res.redirect(`/posts/${post.id}`);
 	},
+	//Posts image gallery
+	async postGallery(req, res, next)  {
+		let post = await Post.findById(req.params.id)
+		//render the page   
+		res.render('posts/biz_photos', {post: post})
+		
+	},
 	// Posts Destroy
 	async postDestroy(req, res, next) {
 		const { post } = res.locals;
