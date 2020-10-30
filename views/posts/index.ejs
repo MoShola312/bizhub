@@ -1,6 +1,6 @@
 <% layout('layouts/boilerplate') -%>
 
-<h1>Posts Index!</h1>
+<h1>List of All Businesses</h1>
 <div class="container">
 	    <div class="row">
 	            <div class="col-4">
@@ -16,6 +16,7 @@
 	<% include ../partials/paginatePosts %>
 	<div class="row text-center" style="display:flex;">
 		<% posts.docs.forEach(function(post) { %>
+		
 		<div class="col-lg-4 col-md-4 col-sm-6 mb-4">
 			<div class="card" style="width: 18rem;">
 				
@@ -25,7 +26,6 @@
 
 				<div class="card-body">
 				<h5 class="card-title"><%= post.title %></h5>
-				<!-- <h7>Price: <%= post.price %></h7> -->
 				<% for(let i = 0; i < 5; i++) { %>
 					<% if(i < Math.floor(post.avgRating)) { %>
 						<!-- display a full star -->
