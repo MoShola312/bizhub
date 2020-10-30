@@ -11,6 +11,7 @@ const {
   postShow,
   postEdit,
   postUpdate,
+  postGallery,
   postDestroy
 } = require('../controllers/posts');
 
@@ -35,7 +36,8 @@ router.put('/:id', isLoggedIn, asyncErrorHandler(isOwner), upload.array('images'
 /* DELETE posts destroy /posts/:id */
 router.delete('/:id', isLoggedIn, asyncErrorHandler(isAuthor), asyncErrorHandler(postDestroy));
 
-
+/* GET posts /posts/:id/biz_photos */
+router.get('/:id/biz_photos', asyncErrorHandler(postGallery));
 
 
 module.exports = router;
