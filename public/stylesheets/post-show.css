@@ -33,3 +33,11 @@
   border-radius: 15px ;
   margin-bottom: 1em;
 }
+.overlay{
+  position: absolute;
+  top: 15%;
+  right: 9%;
+  transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%, -50%);
+  z-index: 2
+}
