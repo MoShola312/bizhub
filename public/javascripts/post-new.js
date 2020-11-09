@@ -2,9 +2,9 @@
 $('#addHours').on('click', function(){
     //reads the selected day/hours and converts it into texts
 
-    const day = $('#day option:selected').text();
-    const hourStart = $('#hourStart option:selected').text();
-    const hourEnd = $('#hourEnd option:selected').text();
+    const day = $('#day option:selected').val();
+    const hourStart = $('#hourStart option:selected').val();
+    const hourEnd = $('#hourEnd option:selected').val();
     //creates a div call and gives it a class of display-hours
     var div = $('<div/>').attr("class", "display-hours");
     //creates a span and assign it's text the variable day
@@ -13,6 +13,11 @@ $('#addHours').on('click', function(){
     var spanHourStart = $("<span> </span>").text(hourStart);
     var spanDash = $("<span> </span>").text("-");
     var spanHourEnd = $("<span> </span>").text(hourEnd);
+    // let storeHours = {
+    //     day: day,
+    //     hourStart: hourStart,
+    //     hourEnd: hourEnd
+    // },
     
     var input = $('<input>').attr({
         type: 'hidden', 

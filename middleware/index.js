@@ -89,7 +89,7 @@ reqBodySanitizer: (req, res, next) => {
 	isAuthor: async (req, res, next) => {
 		const post = await Post.findById(req.params.id);
 		if (post.author.equals(req.user._id) || req.user.isAdmin) {
-			console.log("res.locals.author " + post)
+			// console.log("res.locals.author " + post)
 			res.locals.post = post;
 			return next();
 		}
@@ -99,7 +99,7 @@ reqBodySanitizer: (req, res, next) => {
 	isOwner: async (req, res, next) => {
 		const post = await Post.findById(req.params.id)
 			if (post.owner.equals(req.user._id) || req.user.isAdmin) {
-				console.log("res.locals.post " + post)
+				// console.log("res.locals.post " + post)
 				res.locals.post = post;
 				return next();
 		}

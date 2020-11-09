@@ -37,13 +37,6 @@ const PostSchema = new Schema({
 		// }
 	],
 
-	// hours: [
-	// 	{
-	// 		day: String, 
-	// 		hourStart: String, 
-	// 		hourEnd: String
-	// 	}
-	// ],
 	// hours: [String],
 	categories: [String],
 	music: [String],

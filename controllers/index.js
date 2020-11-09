@@ -31,7 +31,7 @@ module.exports = {
 			
 			//creates an admin profile if right code is match
 			const newUser = new User(req.body);
-			if(req.body.adminCode === 'secretcode123'){
+			if(req.body.adminCode === 'secret5278'){
 				newUser.isAdmin = true;
 			}
 
