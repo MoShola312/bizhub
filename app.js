@@ -1,6 +1,6 @@
-if (process.env.NODE_ENV !== "production"){
+// if (process.env.NODE_ENV !== "production"){
   require('dotenv').config();
-}
+// }
 
 
 const express = require('express');
@@ -121,8 +121,7 @@ const scriptSrcUrls = [
     "https://cdnjs.cloudflare.com/",
     "https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js/",
     "https://cdn.jsdelivr.net",
-    
-   
+    "api.fontawesome.com"
 ];
 const styleSrcUrls = [
     "https://kit-free.fontawesome.com/",

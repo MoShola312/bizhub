@@ -15,7 +15,7 @@ module.exports = {
 	async landingPage(req, res, next) {
 		const posts = await Post.find({}).sort('-_id').exec();
 		const recentPosts = posts.slice(0, 3);
-		res.render('index', { posts, mapBoxToken, recentPosts, title: 'Surf Shop - Home' });
+		res.render('index', { posts, mapBoxToken, recentPosts, title: 'BizHub - Home' });
 	},
 	// GET /register
 	getRegister(req, res, next) {

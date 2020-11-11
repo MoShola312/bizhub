@@ -17,7 +17,7 @@
 	<div class="row text-center" style="display:flex;">
 		<% posts.docs.forEach(function(post) { %>
 		
-		<div class="col-lg-4 col-md-4 col-sm-6 mb-4">
+		<div class="col-lg-4 col-md-4 col-sm-6 mb-5">
 			<div class="card" style="width: 18rem;">
 				
 				<% if(post.images.length != 0){ %>
@@ -25,19 +25,19 @@
 				<% } %>
 
 				<div class="card-body">
-				<!-- <h5 class="card-title"><%= post.title %></h5> -->
-				<!-- <% for(let i = 0; i < 5; i++) { %> -->
-					<!-- <% if(i < Math.floor(post.avgRating)) { %> -->
+				<h5 class="card-title"><%= post.title %></h5>
+				<% for(let i = 0; i < 5; i++) { %>
+					<% if(i < Math.floor(post.avgRating)) { %>
 						<!-- display a full star -->
-						<!-- <i class="fas fa-star"></i> -->
-					<!-- <% } else if((post.avgRating - i) > 0 && (post.avgRating - i) < 1) { %> -->
+						<img src="/images/star-fill.svg" alt="full-star" class="fa-star" >
+					<% } else if((post.avgRating - i) > 0 && (post.avgRating - i) < 1) { %>
 							<!-- display a half star -->
-							<!-- <i class="fas fa-star-half-alt"></i> -->
-						<!-- <% } else { %> -->
+							<img src="/images/star-half.svg" class="fa-star-half-alt" alt="half-star">
+						<% } else { %>
 								<!-- display an empty star -->
-								<!-- <i class="far fa-star"></i> -->
-							<!-- <% } %> -->
-				<!-- <% } %> -->
+								<img src="/images/star.svg" alt="empty star">
+							<% } %>
+				<% } %>
 				<p class="card-text"><%= `${post.avgRating} star${post.avgRating === 1 ? '' : 's'}` %></p>
 				<p><%= `${post.reviews.length} review${post.reviews.length === 1 ? '' : 's'} ` %></p>
 
