@@ -34,8 +34,8 @@ const app = express();
 
 // connect to the database
 
-// const dbUrl = 'mongodb://localhost:27017/surf-shop';
-const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/surf-shop'
+const dbUrl = 'mongodb://localhost:27017/surf-shop';
+// const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/surf-shop'
 
 // mongoose.connect(dbUrl, {
 //   useNewUrlParser: true,
@@ -117,10 +117,12 @@ const scriptSrcUrls = [
     "https://api.mapbox.com/",
     "https://kit.fontawesome.com/",
     "https://code.jquery.com/",
+    'https://code.jquery.com/jquery-3.3.1.slim.min.js',
     "https://cdnjs.cloudflare.com/",
     "https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js/",
     "https://cdn.jsdelivr.net",
-    // "\surf-shop\public\wrapkit",   
+    
+   
 ];
 const styleSrcUrls = [
     "https://kit-free.fontawesome.com/",
@@ -139,13 +141,15 @@ const connectSrcUrls = [
 ];
 const fontSrcUrls = [
   "https://use.fontawesome.com/",
-  "https://fonts.gstatic.com/"
+  "https://fonts.gstatic.com/",
+ 
 ];
+
 
 app.use(
     helmet.contentSecurityPolicy({
         directives: {
-            defaultSrc: [],
+            defaultSrc: ["*", 'unsafe-inline', 'unsafe-eval', "data: blob:"],
             connectSrc: ["'self'", ...connectSrcUrls],
             scriptSrc: ["'unsafe-inline'", "'self'", ...scriptSrcUrls],
             styleSrc: ["'self'", "'unsafe-inline'", ...styleSrcUrls],
