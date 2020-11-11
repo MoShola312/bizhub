@@ -34,8 +34,8 @@ const app = express();
 
 // connect to the database
 
-// const dbUrl = process.env.DB_URL;
-const dbUrl =process.env.DB_URL || 'mongodb://localhost:27017/surf-shop'
+// const dbUrl = 'mongodb://localhost:27017/surf-shop';
+const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/surf-shop'
 
 // mongoose.connect(dbUrl, {
 //   useNewUrlParser: true,
@@ -77,17 +77,17 @@ app.locals.moment = require('moment');
 // app.use(mongoSanitize({
 //   replaceWith: '_'
 // }))
-const secret = process.env.secret || 'hang ten dude!',
+const secret = process.env.secret || 'hang ten dude!';
 
 const store = new MongoDBStore({
   url: dbUrl,
   secret,
   touchAfter: 24 * 60 * 60
-})
+});
 
 store.on("error", function(e){
   console.log("SESSION STORE ERROR", e)
-})
+});
 
 // Configure Passport and Sessions
 app.use(session({
@@ -124,7 +124,6 @@ const scriptSrcUrls = [
 ];
 const styleSrcUrls = [
     "https://kit-free.fontawesome.com/",
-    "https://pro.fontawesome.com/",
     "https://stackpath.bootstrapcdn.com/",
     "https://api.mapbox.com/",
     "https://api.tiles.mapbox.com/",
