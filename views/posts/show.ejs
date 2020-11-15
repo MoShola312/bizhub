@@ -4,7 +4,7 @@
 		<% post.images.forEach(function(image) { %>
 		<div class="img-div col-lg-3">
 			<a href="#a<%=image._id%>"  role="button" data-toggle="modal">
-				<img class="thumbnail-img" src="<%= image.url %>" alt=" " height="250px"> 
+				<img class="thumbnail-img" src="<%= image.url %>" alt=" " > 
 			</a>	
 		</div>
 			<!-- Modal -->
@@ -35,10 +35,10 @@
 
 <hr>
 
-<div class="container-fluid">
+<div class="container">
 	<div class="row">
-		<div class="col-2"></div>
-		<div class="col-6">
+		<div class="col-sm-2 col-lg-2"></div>
+		<div class="col-lg-5 col-sm-12">
 			<h1><%= post.title %></h1>
 			<!-- displays ratings in stars icons -->
 			<% function starDisplay(rating, avgRating) { %>
@@ -65,26 +65,26 @@
 			<% } %>
 			<hr>
 		</div>
-		<div class="col-3 list-group">
+		<div class="col-lg-4 col-sm-12 list-group">
 			<% if(post.owner.isAdmin){ %>
 				<li class="list-group-item"><strong>This business hasn't been claimed yet.</strong></li>
 			  <% } else { %>
-				<li class="list-group-item">Owner: <%= post.owner.username %></li>
+				<li class="list-group-item"><span class="heading">Owner:</span> <%= post.owner.username %></li>
 			<% } %>
 				
 			
-			<li class="list-group-item">Description: <%= post.description %></li>
+			<li class="list-group-item"><span class="heading">Description:</span> <%= post.description %></li>
 			<% if (post.isSocial==='yes'){%>
 				
-				<li class="list-group-item">Cover: <%= post.price %></li>
-				<li class="list-group-item">Music: <%= post.music.join(', ') %></li>
-				<li class="list-group-item">Crowd: <%= post.crowd.join(', ') %></li>
+				<li class="list-group-item"><span class="heading">Cover:</span> <%= post.price %></li>
+				<li class="list-group-item"><span class="heading">Music:</span> <%= post.music.join(', ') %></li>
+				<li class="list-group-item"><span class="heading">Crowd:</span> <%= post.crowd.join(', ') %></li>
 			<% } %>
-			<li class="list-group-item">Phone: <%= post.phone %></li>
-			<li class="list-group-item">Website: <a href="<%= post.website %>" target="_blank"> <%= post.website %></a></li>
+			<li class="list-group-item"><span class="heading">Phone:</span> <%= post.phone %></li>
+			<li class="list-group-item"><span class="heading">Website:</span> <a href="<%= post.website %>" target="_blank"> <%= post.website %></a></li>
 			<% if (post.onlineOnly==='no'){%>
-				<li class="list-group-item">Location: <%= post.location %></li>
-				<li class="list-group-item">Hours:<br>
+				<li class="list-group-item"><span class="heading">Location:</span> <%= post.location %></li>
+				<li class="list-group-item"><span class="heading">Hours:</span><br>
 				<% post.hours.forEach(function(hour){ %>
 					<span class='day'><%= hour.day %> </span> 
 				    <span> <%= hour.hourStart %> - </span>
@@ -94,12 +94,12 @@
 			</li>
 			<%}%>
 			
-			<li class="list-group-item">Categories: <%= post.categories.join(', ') %></li>
+			<li class="list-group-item"><span class="heading">Categories:</span> <%= post.categories.join(', ') %></li>
 		</div>
 	</div>
 	
 <div class="row">
-	<div class="col-2"></div>
+	<div class="col-sm-2 col-lg-2"></div>
 	
 	<div class="col-2">
 		
