@@ -5,24 +5,29 @@
 		<div class="col-6 form-group">
 			<h1>Edit Post!</h1>
 			<form action="/posts/<%= post.id %>?_method=PUT" method="POST" id="postEditForm" enctype="multipart/form-data">
-				<div><label for="title" width="100px">Title<input type="text" class="form-control" name="post[title]" id="title" placeholder="Title" value="<%= post.title  %>"></label></div>
+				<div class="form-group">
+					<label for="title" width="100px">Title</label>
+					<input type="text" class="form-control" name="post[title]" id="title" placeholder="Title" value="<%= post.title  %>">
+				</div>
 				<div class="form-group"><label for="ownerEmail">Is there a business owner? Enter owner's email below:</label>
 				
 					<input class="form-control" id="ownerEmail" type="email" name="post[businessOwnerEmail]"  placeholder="Business owner's email"> </div>
 			
 					<div><label for="price" width="100px">Cover<input type="number" id="price" class="form-control" name="post[price]" step="1.00" placeholder="Cover charge?" value="<%= post.price  %>"></label></div>
-				<div>
+				<div class="form-group">
 					<input type="file" class="form-control" id="imageUpload" accept="images/*" name="images" multiple />
-					<div>
+				</div>
+					<div class="form-group">
 						<% post.images.forEach(function(image, i) { %>
 							<img src="<%= image.url %>" width="100px" />
 							<label for="image<%= i %>">Delete?</label>
 							<input class="form-control" type="checkbox" name="deleteImages[]" class="imageDeleteCheckbox" id="image<%= i %>" value="<%= image.public_id %>">
 						<% }); %>
 					</div>
-				</div>
-				<div>
-					<textarea name="post[description]" id="description" placeholder="Description"><%= post.description  %></textarea>
+				
+				<div class="form-group">
+					<label>Description</label>
+					<textarea name="post[description]" id="description" class="form-control" placeholder="Description"><%= post.description  %></textarea>
 				</div>
 
 				<div class="form-group"><p>Is this business exclusively online?</p><input class="form-check-input onlineOnly" type="radio" name="post[onlineOnly]" value='yes' <%= (post.onlineOnly =='yes') ? 'checked' : '' %>> Yes<br>
@@ -56,7 +61,10 @@
 					<% }%>
 				</div>
 			
-				<div><label for="website" width="100px">Website<input class="form-control" type="text" name="post[website]" placeholder="Website" id="website" value="<%= post.website  %>"></label></div>
+				<div class="form-group">
+					<label for="website" width="100px">Website</label>
+					<input class="form-control" type="text" name="post[website]" placeholder="Website" id="website" value="<%= post.website  %>">
+				</div>
 				
 				<div class="form-group categories">
 					<label for="categories" width="100px">Categories</label>
@@ -70,7 +78,10 @@
 					<% }%>
 				</div>
 
-				<div><label for="location" width="100px">Location<input class="form-control locationInput" type="text" name="post[location]" placeholder="Location" id="location" value="<%= post.location  %>"></label></div>
+				<div class="form-group">
+					<label for="location" width="100px">Location</label>
+					<input class="form-control locationInput" type="text" name="post[location]" placeholder="Location" id="location" value="<%= post.location  %>">
+				</div>
 
 				<div class="mb-3" id="output">
 					<% post.hours.forEach(function(hour){ %>
