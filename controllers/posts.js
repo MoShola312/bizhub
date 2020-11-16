@@ -276,7 +276,7 @@ module.exports = {
 		
 		//adds http to websites if not present
 		if(req.body.post.website){
-			if(!req.body.post.website.startsWith('http://')){
+			if(!req.body.post.website.startsWith('http://') || !req.body.post.website.startsWith('https://')){
 				post.website = 'http://' + req.body.post.website
 			}
 		}

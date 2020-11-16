@@ -1,9 +1,9 @@
 .img-div  {
-	display: block;
+  display: block;
   margin-left: auto;
   margin-right: auto;
   padding: 10px;
-  width: 40%;
+  /* width: 50%; */
 	/* margin: 0 auto */
 }
 .card {
