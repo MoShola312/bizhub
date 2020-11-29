@@ -1,24 +1,31 @@
 <% layout('layouts/post-show-layout') -%>
-<div class="row">
+<div class="container-fluid">
+	<div class="row">
 	
 		<% post.images.forEach(function(image) { %>
 		<div class="img-div col-lg-3">
 			<a href="#a<%=image._id%>"  role="button" data-toggle="modal">
-				<img class="thumbnail-img" src="<%= image.url %>" alt=" " > 
+				<img class="thumbnail-img img-fluid" src="<%= image.url %>" alt=" " > 
 			</a>	
 		</div>
 			<!-- Modal -->
-			<div class="modal fade" id="a<%= image._id%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-				<div class="modal-dialog modal-lg" role="document">
+			<div class="modal fade" id="a<%= image._id%>" tabindex="-1" role="dialog" aria-labelledby="#a<%= image._id%>" aria-hidden="true">
+				<div class="modal-dialog modal-xl" role="document">
 					<div class="modal-content">
-						<div class="modal-header">
-							<h5 class="modal-title"><%=post.title %></h5>
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-								<span aria-hidden="true">&times;</span>
-							</button>
-						</div>
-						<div class="modal-body mx-auto">
-							<img src="<%= image.url %>" alt="">
+						<div class="container">
+                            <div class="row justify-content-center">
+                                <div class="col-lg-8 col-sm-12">
+									<div class="modal-header">
+										<h5 class="modal-title"><%=post.title %></h5>
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+											<span aria-hidden="true">Close &times;</span>
+										</button>
+									</div>
+									<div class="modal-body mx-auto">
+										<img class="img-fluid rounded mb-5" src="<%= image.url %>" alt="">
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -32,12 +39,13 @@
 		<% } %>
 		
 	</div>
+</div>
+
 
 <hr>
 
 <div class="container">
 	<div class="row">
-		<div class="col-sm-2 col-lg-2"></div>
 		<div class="col-lg-5 col-sm-12">
 			<h1><%= post.title %></h1>
 			<!-- displays ratings in stars icons -->
@@ -59,13 +67,14 @@
 			<%= `${post.avgRating} star${post.avgRating === 1 ? '' : 's'}` %>
 			<hr>
 			<% if (post.location) { %>
-				<div class="col-6 ">
+				<div class="col-5 ">
 					<div id='map'></div>
 				</div>
 			<% } %>
 			<hr>
 		</div>
-		<div class="col-lg-4 col-sm-12 list-group">
+		<!-- <div class="col-lg-4 col-sm-12 list-group"> -->
+		<div class="col-lg-auto col-sm-auto list-group">
 			<% if(post.owner.isAdmin){ %>
 				<li class="list-group-item"><strong>This business hasn't been claimed yet.</strong></li>
 			  <% } else { %>
@@ -97,14 +106,11 @@
 			<li class="list-group-item"><span class="heading">Categories:</span> <%= post.categories.join(', ') %></li>
 		</div>
 	</div>
-	
-<div class="row">
-	<div class="col-sm-2 col-lg-2"></div>
-	
-	<div class="col-2">
-		
+
+<!-- update post -->
+<div class="row mt-3 justify-content-center">
 		<% if (currentUser && post.owner.equals(currentUser._id) || currentUser && currentUser.isAdmin) { %>
-			<div class="form-group">
+			<div class="col-lg-3 form-group">
 				<a href="/posts/<%= post.id %>/edit" class="form-group">
 					<button class="btn btn-primary mb-2">Edit</button>
 				</a>
@@ -112,23 +118,26 @@
 			<% } %>
 			
 			<% if (currentUser && currentUser.isAdmin) { %>
-			<div class="form-group">
+			<div class="col-lg-3 form-group">
 				<form class="delete-form" action="/posts/<%= post.id %>?_method=DELETE" method="POST">
 					<input class="btn btn-danger" type="submit" value="Delete">
 				</form>
 			</div>
 		<% } %>
-	</div>
 </div>		
 
 <!-- Create a review -->
-<div class="row">
-	<div class="col-2"></div>
-	<div class="col-6">
+<div class="row justify-content-center">	
+	<div class="col-sm-12 mt-5">
 		<% if(currentUser) { %>
+			<!-- <div class="col-sm-10"> -->
 			<h2>Create a Review</h2>
-			<form action="/posts/<%= post.id %>/reviews" method="POST" id='create-review-form'>
+			
+				<form action="/posts/<%= post.id %>/reviews" method="POST" id='create-review-form'>
 				<textarea name="review[body]" required></textarea>
+			<!-- </div> -->
+			
+				<!-- <div class="col-sm-10"> -->
 				<fieldset class="starability-basic">
 					<legend>Rating:</legend>
 					<button class="clear-rating btn btn-warning mb-2" type="button">Clear Rating</button>
@@ -146,64 +155,57 @@
 				</fieldset>
 			
 				<input class="btn btn-success mb-2" type="submit">
+			<!-- </div> -->
 			</form>
 			<% } else { %>
 			<h2><a href="/login?returnTo=true">Create a Review</a></h2>
 			<% } %>
 	<hr>
 	</div>
-	<div class="col-2"></div>
+	
 </div>
 
-
-<div class="row">
-	<div class="col-2"></div>
-	<div class="col-8">
+<!-- Review -->
+<div class="row justify-content-center">
+	<div class="col-12">
 			<h3>Reviews</h3><hr>
 	</div>
-	<div class="col-2"></div>	
 </div>
-
 
 
 <!-- display all reviews -->
 <% post.reviews.forEach(function(review) { %>
+<div class="row justify-content-center">
 	
-	
-<div class="row">
-	<div class="col-2"></div>
-	<!-- <p id="append-review"></p> -->
-	<div class="col-1">
-		<a href="/profile/<%=review.author.id %>"><img src="<%= review.author.image.secure_url %>" class="profile-show-image mr-2">
+	<div class="col-2">
+		<a href="/profile/<%=review.author.id %>"><img src="<%= review.author.image.secure_url %>" class="profile-show-image">
 			<%= review.author.username %></a>
 	</div>
-	<div class="col-4">
-		<p>
-			<% starDisplay(review.rating) %> ,  <%= moment(review.createdAt).fromNow() %>
+	<div class="col-6">
+		<p><% starDisplay(review.rating) %><br>  <%= moment(review.createdAt).fromNow() %>
 		</p>
+
 		<p>Rating: <%= review.rating %> 
 		<br><%= review.body %></p>
 		<!-- like button -->
-		<div style="padding-bottom: 10px;">
-			<form action="/posts/<%= post.id %>/reviews/<%= review.id %>/like" method="POST" class="likeForm">
-				<div class="btn-group">
-					<% if (currentUser && review.likes.some(function (like) { 
-						return like.equals(currentUser._id)
-					 })) { %>
-						<button class="btn btn-sm btn-primary likedBtn1" id='<%= review.id %>'>
-							<i class="fas fa-thumbs-up" ></i> Liked (<%= review.likes.length %>)
-						</button>
-					<% } else { %>
-						<button class="btn btn-secondary btn-sm likedBtn1" id='<%= review.id %>'>
-							<i class="fas fa-thumbs-up" ></i> Like (<%= review.likes.length %>)
-						</button>
-					<% } %>
+					<div style="padding-bottom: 10px;">
+						<form action="/posts/<%= post.id %>/reviews/<%= review.id %>/like" method="POST" class="likeForm">
+							<div class="btn-group">
+								<% if (currentUser && review.likes.some(function (like) { 
+									return like.equals(currentUser._id)
+								})) { %>
+									<button class="btn btn-sm btn-primary likedBtn1" id='<%= review.id %>'>
+										<i class="fas fa-thumbs-up" ></i> Liked (<%= review.likes.length %>)
+									</button>
+								<% } else { %>
+									<button class="btn btn-secondary btn-sm likedBtn1" id='<%= review.id %>'>
+										<i class="fas fa-thumbs-up" ></i> Like (<%= review.likes.length %>)
+									</button>
+								<% } %>
 
-				</div>
-			</form>
-		</div>
-
-
+							</div>
+						</form>
+					</div>
 		<div>
 			<!-- reply form -->
 			<!-- only reviewer and biz owner can reply -->
@@ -223,36 +225,40 @@
 	</div>
 	<!-- update a review -->
 	<% if(currentUser && review.author.equals(currentUser._id) || currentUser && currentUser.isAdmin) { %>
-		<div class="form-group col-3">
-			<button class="toggle-edit-form btn btn-primary mb-2">Edit</button>
-			<form action="/posts/<%= post.id %>/reviews/<%= review.id %>?_method=PUT" method="POST" class="edit-review-form">
-				<textarea name="review[body]" required><%= review.body %></textarea>
-				<fieldset class="starability-basic">
-				<legend>Rating:</legend>
-				<button class="clear-rating" type="button">Clear Rating</button>
-				<input type="radio" id="edit-rate0" class="input-no-rate" name="review[rating]" value="0" checked aria-label="No rating." />
-				<input type="radio" id="edit-rate1" name="review[rating]" value="1" />
-				<label for="edit-rate1" title="Terrible">1 star</label>
-				<input type="radio" id="edit-rate2" name="review[rating]" value="2" />
-				<label for="edit-rate2" title="Not good">2 stars</label>
-				<input type="radio" id="edit-rate3" name="review[rating]" value="3" />
-				<label for="edit-rate3" title="Average">3 stars</label>
-				<input type="radio" id="edit-rate4" name="review[rating]" value="4" />
-				<label for="edit-rate4" title="Very good">4 stars</label>
-				<input type="radio" id="edit-rate5" name="review[rating]" value="5" />
-				<label for="edit-rate5" title="Amazing">5 stars</label>
-				</fieldset>
-				<input class="btn btn-success" type="submit" value="Update">
-			</form>
+		<div class="form-group col-4 d-flex">
+			<div>
+				<button class="toggle-edit-form btn btn-primary mb-2">Edit</button>
+				<form action="/posts/<%= post.id %>/reviews/<%= review.id %>?_method=PUT" method="POST" class="edit-review-form">
+					<textarea name="review[body]" required><%= review.body %></textarea>
+					<fieldset class="starability-basic">
+					<legend>Rating:</legend>
+					<button class="clear-rating" type="button">Clear Rating</button>
+					<input type="radio" id="edit-rate0" class="input-no-rate" name="review[rating]" value="0" checked aria-label="No rating." />
+					<input type="radio" id="edit-rate1" name="review[rating]" value="1" />
+					<label for="edit-rate1" title="Terrible">1 star</label>
+					<input type="radio" id="edit-rate2" name="review[rating]" value="2" />
+					<label for="edit-rate2" title="Not good">2 stars</label>
+					<input type="radio" id="edit-rate3" name="review[rating]" value="3" />
+					<label for="edit-rate3" title="Average">3 stars</label>
+					<input type="radio" id="edit-rate4" name="review[rating]" value="4" />
+					<label for="edit-rate4" title="Very good">4 stars</label>
+					<input type="radio" id="edit-rate5" name="review[rating]" value="5" />
+					<label for="edit-rate5" title="Amazing">5 stars</label>
+					</fieldset>
+					<input class="btn btn-success" type="submit" value="Update">
+				</form>
+			</div>
 			<script>
 				$('#edit-rate<%= review.rating %>').prop('checked', true);
 			</script>
-			<form action="/posts/<%= post.id %>/reviews/<%= review.id %>?_method=DELETE" method="POST">
-				<input class="btn btn-danger" type="submit" value="Delete">
-			</form>
+			<div>
+				<form action="/posts/<%= post.id %>/reviews/<%= review.id %>?_method=DELETE" method="POST">
+					<input class="btn btn-danger" type="submit" value="Delete">
+				</form>
+			</div>
 		</div>
 		<% } %>
-		<div class="col-2"></div>
+		
 	</div>
 
 	<!-- display replies -->
@@ -260,26 +266,26 @@
 		<!-- if post.review id matches the reviewReply id, display the reply -->
 		<% if(review.id===key.id){ %>	
 				<%	key.replies.forEach(function(reply){ %>
-				<div class="row">
-					<div class="col-3"></div>	
-					<div class="col-5 reply-body">
+				<div class="row justify-content-center">
+					<!-- <div class="col-3"></div>	 -->
+					<div class="col-6 reply-body">
 						<!-- gives the owner a checkmark and identifies them -->
 						<% if(post.owner.equals(reply.author)&&(!post.owner.isAdmin)){ %>
-							<p><a href="/profile/<%=reply.author.id %>"><img src="<%= reply.author.image.secure_url %>" class="reply-profile-show-image mr-2"><strong><%= reply.author.username %></strong>
+							<p><a href="/profile/<%=reply.author.id %>"><img src="<%= reply.author.image.secure_url %>" class="reply-profile-show-image mr-3"><strong><%= reply.author.username %></strong>
 								<i class="far fa-check-circle"></i></a> owner of <strong><%= post.title %></strong>
 							<br><span><%= moment(reply.createdAt).fromNow()%> - <%= reply.body %></span> </p>
 							<%} else if(reply.author.isAdmin){ %>
-								<p><a href="/profile/<%=reply.author.id %>"><img src="<%= reply.author.image.secure_url %>" class="reply-profile-show-image mr-2"><strong><%= reply.author.username %></strong>
+								<p><a href="/profile/<%=reply.author.id %>"><img src="<%= reply.author.image.secure_url %>" class="reply-profile-show-image mr-3"><strong><%= reply.author.username %></strong>
 									<i class="fas fa-user-check">Admin</i></a>
 								<br><span><%= moment(reply.createdAt).fromNow()%> - <%= reply.body %></span> </p>
 							<%} else {%>
-								<p><a href="/profile/<%=reply.author.id %>"><img src="<%= reply.author.image.secure_url %>" class="reply-profile-show-image mr-2"><strong><%= reply.author.username %></strong></a> 
+								<p><a href="/profile/<%=reply.author.id %>"><img src="<%= reply.author.image.secure_url %>" class="reply-profile-show-image mr-3"><strong><%= reply.author.username %></strong></a> 
 								<br><span><%= moment(reply.createdAt).fromNow()%> - <%= reply.body %></span> </p>
 						<%}%>
 					</div>
 					<!-- update a reply -->
 					<% if(currentUser && reply.author.equals(currentUser._id) || currentUser && currentUser.isAdmin) { %>
-						<div class="form-group col-4">
+						<div class="form-group col-2">
 						<button class="toggle-edit-form mb-2">Edit</button>
 						<form action="/posts/<%= post.id %>/reviews/<%= review.id %>/replies/<%= reply.id %>?_method=PUT" method="POST" class="edit-review-form">
 							<textarea name="reply[body]" required><%= reply.body %></textarea>
