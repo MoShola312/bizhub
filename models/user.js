@@ -7,8 +7,8 @@ const UserSchema = new Schema({
 	username: String,
 	email: { type: String, unique: true, required: true },
 	image:  {
-		secure_url: { type: String, default: '/images/default-profile.jpg' },
-		public_id: String
+		path: { type: String, default: '/images/default-profile.jpg' },
+		filename: String
 	},
 	resetPasswordToken: String,
 	resetPasswordExpires: Date

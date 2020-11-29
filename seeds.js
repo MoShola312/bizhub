@@ -22,8 +22,8 @@ async function seedPosts() {
 			author: '5d35ca2944a91b20684dd02c',
 			images: [
 				{
-					url: 'https://res.cloudinary.com/dnrh8742s/image/upload/v1572533780/surf-shop/surfboard.jpg',
-					public_id: 'surf-shop/surfboard'
+					path: 'https://res.cloudinary.com/dnrh8742s/image/upload/v1572533780/surf-shop/surfboard.jpg',
+					filename: 'surf-shop/surfboard'
 				}
 			]
 		}

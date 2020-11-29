@@ -98,7 +98,7 @@ $.ajax({
 //   <div class="row">
 // 	<div class="col-2"></div>
 // 	<div class="col-1">
-//   		<a href="/profile/${response.author.id}"><img src="${response.author.image.secure_url} " class="profile-show-image mr-2">
+//   		<a href="/profile/${response.author.id}"><img src="${response.author.image.path} " class="profile-show-image mr-2">
 // 			${response.author.username }</a>
 // 	</div>
 // 	<div class="col-4">

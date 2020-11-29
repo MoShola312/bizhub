@@ -7,10 +7,7 @@ const PostSchema = new Schema({
 	title: String,
 	price: String,
 	description: String,
-	images: [ { url: { type: String,
-		default: '/images/default-post.png' 
-	}, 
-				public_id: String,  
+	images: [ { path: String, filename: String,  
 			} ],
 	location: String,
 	geometry: {

@@ -5,7 +5,7 @@
 		<% post.images.forEach(function(image) { %>
 		<div class="img-div col-lg-3">
 			<a href="#a<%=image._id%>"  role="button" data-toggle="modal">
-				<img class="thumbnail-img img-fluid" src="<%= image.url %>" alt=" " > 
+				<img class="thumbnail-img img-fluid" src="<%= image.path %>" alt=" " > 
 			</a>	
 		</div>
 			<!-- Modal -->
@@ -22,7 +22,7 @@
 										</button>
 									</div>
 									<div class="modal-body mx-auto">
-										<img class="img-fluid rounded mb-5" src="<%= image.url %>" alt="">
+										<img class="img-fluid rounded mb-5" src="<%= image.path %>" alt="">
 									</div>
 								</div>
 							</div>
@@ -178,7 +178,7 @@
 <div class="row justify-content-center">
 	
 	<div class="col-2">
-		<a href="/profile/<%=review.author.id %>"><img src="<%= review.author.image.secure_url %>" class="profile-show-image">
+		<a href="/profile/<%=review.author.id %>"><img src="<%= review.author.image.path %>" class="profile-show-image">
 			<%= review.author.username %></a>
 	</div>
 	<div class="col-6">
@@ -271,15 +271,15 @@
 					<div class="col-6 reply-body">
 						<!-- gives the owner a checkmark and identifies them -->
 						<% if(post.owner.equals(reply.author)&&(!post.owner.isAdmin)){ %>
-							<p><a href="/profile/<%=reply.author.id %>"><img src="<%= reply.author.image.secure_url %>" class="reply-profile-show-image mr-3"><strong><%= reply.author.username %></strong>
+							<p><a href="/profile/<%=reply.author.id %>"><img src="<%= reply.author.image.path %>" class="reply-profile-show-image mr-3"><strong><%= reply.author.username %></strong>
 								<i class="far fa-check-circle"></i></a> owner of <strong><%= post.title %></strong>
 							<br><span><%= moment(reply.createdAt).fromNow()%> - <%= reply.body %></span> </p>
 							<%} else if(reply.author.isAdmin){ %>
-								<p><a href="/profile/<%=reply.author.id %>"><img src="<%= reply.author.image.secure_url %>" class="reply-profile-show-image mr-3"><strong><%= reply.author.username %></strong>
+								<p><a href="/profile/<%=reply.author.id %>"><img src="<%= reply.author.image.path %>" class="reply-profile-show-image mr-3"><strong><%= reply.author.username %></strong>
 									<i class="fas fa-user-check">Admin</i></a>
 								<br><span><%= moment(reply.createdAt).fromNow()%> - <%= reply.body %></span> </p>
 							<%} else {%>
-								<p><a href="/profile/<%=reply.author.id %>"><img src="<%= reply.author.image.secure_url %>" class="reply-profile-show-image mr-3"><strong><%= reply.author.username %></strong></a> 
+								<p><a href="/profile/<%=reply.author.id %>"><img src="<%= reply.author.image.path %>" class="reply-profile-show-image mr-3"><strong><%= reply.author.username %></strong></a> 
 								<br><span><%= moment(reply.createdAt).fromNow()%> - <%= reply.body %></span> </p>
 						<%}%>
 					</div>

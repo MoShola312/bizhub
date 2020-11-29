@@ -25,8 +25,8 @@ module.exports = {
 	async postRegister(req, res, next) {
 		try {
 			if (req.file) {
-				const { secure_url, public_id } = req.file;
-				req.body.image = { secure_url, public_id };
+				const { path, filename } = req.file;
+				req.body.image = { path, filename };
 			}
 			
 			//creates an admin profile if right code is match
@@ -176,9 +176,9 @@ module.exports = {
 		if (username) user.username = username
 		if (email) user.email = email;
 		if (req.file) {
-			if (user.image.public_id) await cloudinary.v2.uploader.destroy(user.image.public_id);
-			const { secure_url, public_id } = req.file;
-			user.image = { secure_url, public_id };
+			if (user.image.filename) await cloudinary.v2.uploader.destroy(user.image.filename);
+			const { path, filename } = req.file;
+			user.image = { path, filename };
 		}
 		await user.save();
 		const login = util.promisify(req.login.bind(req));

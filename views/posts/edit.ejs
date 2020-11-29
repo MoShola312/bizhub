@@ -19,9 +19,9 @@
 				</div>
 					<div class="form-group">
 						<% post.images.forEach(function(image, i) { %>
-							<img src="<%= image.url %>" width="100px" />
+							<img src="<%= image.path %>" width="100px" />
 							<label for="image<%= i %>">Delete?</label>
-							<input class="form-control" type="checkbox" name="deleteImages[]" class="imageDeleteCheckbox" id="image<%= i %>" value="<%= image.public_id %>">
+							<input class="form-control" type="checkbox" name="deleteImages[]" class="imageDeleteCheckbox" id="image<%= i %>" value="<%= image.filename %>">
 						<% }); %>
 					</div>
 				

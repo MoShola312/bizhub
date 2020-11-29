@@ -1,12 +1,12 @@
 const crypto = require('crypto');
-const cloudinary = require('cloudinary');
+const cloudinary = require('cloudinary').v2;
 cloudinary.config({
 	cloud_name: 'dnrh8742s',
 	api_key: '851735119382545',
 	api_secret: process.env.CLOUDINARY_SECRET
 });
-const cloudinaryStorage = require('multer-storage-cloudinary');
-const storage = cloudinaryStorage({
+const { CloudinaryStorage } = require('multer-storage-cloudinary');
+const storage = new CloudinaryStorage({
   cloudinary,
   folder: 'surf-shop',
   allowedFormats: ['jpeg', 'jpg', 'png'],

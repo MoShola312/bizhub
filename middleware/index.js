@@ -152,7 +152,7 @@ reqBodySanitizer: (req, res, next) => {
 		}
 	},
 	deleteProfileImage: async req => {
-		if (req.file) await cloudinary.v2.uploader.destroy(req.file.public_id);
+		if (req.file) await cloudinary.uploader.destroy(req.file.filename);
 	},
 	async searchAndFilterPosts(req, res, next) {
 		// pull keys from req.query (if there are any) and assign them 

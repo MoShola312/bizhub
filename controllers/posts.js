@@ -44,12 +44,12 @@ module.exports = {
 		if(req.files.length == [])
 		{
 			//default image is placed if the user doesn't upload an image
-			req.body.post.images.push({secure_url:'/images/default-post.png' , public_id: ''})
+			req.body.post.images.push({path:'/images/default-post.png' , filename: ''})
 		} else {
 		for(const file of req.files) {
 			req.body.post.images.push({
-				url: file.secure_url,
-				public_id: file.public_id
+				path: file.path,
+				filename: file.filename
 				
 			});
 		}
@@ -167,7 +167,7 @@ module.exports = {
 			},
 		})
 
-	
+	console.log(post)
 
 		const floorRating = post.calculateAvgRating();
 		let mapBoxToken = process.env.MAPBOX_TOKEN;
@@ -186,16 +186,16 @@ module.exports = {
 			// assign deleteImages from req.body to its own variable
 			let deleteImages = req.body.deleteImages;
 			// loop over deleteImages
-			for(const public_id of deleteImages) {
-				//checks if public_id is an empty string
-				//default image's public_id is an empty string
-				if(public_id != ''){
+			for(const filename of deleteImages) {
+				//checks if filename is an empty string
+				//default image's filename is an empty string
+				if(filename != ''){
 				// delete images from cloudinary
-				await cloudinary.v2.uploader.destroy(public_id);
+				await cloudinary.uploader.destroy(filename);
 				}
 				// delete image from post.images
 				for(const image of post.images) {
-					if(image.public_id === public_id) {
+					if(image.filename === filename) {
 						let index = post.images.indexOf(image);
 						post.images.splice(index, 1);
 					}
@@ -208,8 +208,8 @@ module.exports = {
 			for(const file of req.files) {
 				// add images to post.images array
 				post.images.push({
-					url: file.secure_url,
-					public_id: file.public_id
+					path: file.path,
+					filename: file.filename
 				});
 			}
 		}
@@ -298,10 +298,10 @@ module.exports = {
 	async postDestroy(req, res, next) {
 		const { post } = res.locals;
 			for(const image of post.images) {
-				//checks if public_id is an empty string
-				//default image's public_id is an empty string
-				if(image.public_id != ''){
-					await cloudinary.v2.uploader.destroy(image.public_id);
+				//checks if filename is an empty string
+				//default image's filename is an empty string
+				if(image.filename != ''){
+					await cloudinary.uploader.destroy(image.filename);
 				}
 			}
 		await post.remove();
