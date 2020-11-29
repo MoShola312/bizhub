@@ -44,7 +44,7 @@ module.exports = {
 			
 			req.login(user, function(err) {
 				if (err) return next(err);
-				req.session.success = `Welcome to Surf Shop, ${user.username}! ${user.isAdmin ? 'You\'re an admin' : ''}`;
+				req.session.success = `Welcome to BizHub, ${user.username}! ${user.isAdmin ? 'You\'re an admin' : ''}`;
 				res.redirect('/');
 			});
 		} catch(err) {
@@ -97,7 +97,7 @@ module.exports = {
 			to: 'scholaryorc4@yahoo.com',
 			from: "BizHub Admin <mobiz7314@gmail.com>",
 			// req.user.email,
-			subject: 'Surf Shop - List My Business',
+			subject: 'BizHub - List My Business',
 			text: "  online:  " + req.body.onlineOnly + 
 			"  social: " + req.body.isSocial + 
 			"  description: "+ req.body.description + 
@@ -203,8 +203,8 @@ module.exports = {
 
 		const msg = {
 			to: email,
-			from: 'Surf Shop Admin <your@email.com>',
-			subject: 'Surf Shop - Forgot Password / Reset',
+			from: 'BizHub Admin <your@email.com>',
+			subject: 'BizHub - Forgot Password / Reset',
 			text: `You are receiving this because you (or someone else)
 			have requested the reset of the password for your account.
 			  Please click on the following link, or copy and paste it
@@ -258,8 +258,8 @@ module.exports = {
 
 		const msg = {
 			to: user.email,
-			from: "Surf Shop Admin <*****@gmail.com>",
-			subject: 'Surf Shop - Forgot Password / Reset',
+			from: "BizHub Admin <*****@gmail.com>",
+			subject: 'BizHub - Forgot Password / Reset',
 			text: `Hello,
 		  This email is to confirm that the password for your account has just been changed.
 		  If you did not make this change, please hit reply and notify us at once.`.replace(/		  /g, '')
