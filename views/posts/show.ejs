@@ -176,7 +176,7 @@
 <% post.reviews.forEach(function(review) { %>
 <div class="row">
 	
-	<div class="col-2">
+	<div class="col-2 review-pic">
 		<a href="/profile/<%=review.author.id %>"><img src="<%= review.author.image.path %>" class="profile-show-image">
 			<%= review.author.username %></a>
 	</div>
