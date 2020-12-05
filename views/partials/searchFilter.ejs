@@ -1,19 +1,19 @@
 <form action="/posts" method="GET">
-	<fieldset>
-		<legend>Search</legend>
-		<label for="search">Search</label>
+	<div class="mb-3 mt-3">
 		<input type="text" placeholder="Search" name="search" id="seach" value="<%= query.search %>">
-	</fieldset>
-
-	<fieldset>
+	</div>
+	<div class="mb-3 mt-3">
+		<input type="text" placeholder="Categories" name="categories" id="categories" value="<%= query.categories %>">
+	</div>
 	<div>
   	<label for="location">Location</label>
-  	<input type="text" id="location" name="location" placeholder="Address or Zipcode" value="<%= query.location %>">
+  	<input type="text" id="location" name="location" placeholder="Address or Zipcode" value="<%= query.location %>"><br>
 	  <small><a href="#" id="find-me">use my location</a></small><br>
 	  <p id="status"></p>
   </div>
-		<legend>Distance (miles)</legend>
+		
   	<div>
+		<legend>Distance (miles)</legend>
 	    <input type="radio" name="distance" id="distance25" value="25" <%= query.distance === '25' ? 'checked' : '' %>>
   	  <label for="distance25">25</label>
   	</div>
@@ -29,6 +29,7 @@
   		<a href="#" id="clear-distance">clear</a>
   	</div>
 	</fieldset>
+	
 
 	<fieldset>
 		<legend>Cover</legend>
