@@ -41,7 +41,6 @@
 	</div>
 </div>
 
-
 <hr>
 
 <div class="container">
@@ -175,7 +174,7 @@
 
 <!-- display all reviews -->
 <% post.reviews.forEach(function(review) { %>
-<div class="row justify-content-center">
+<div class="row">
 	
 	<div class="col-2">
 		<a href="/profile/<%=review.author.id %>"><img src="<%= review.author.image.path %>" class="profile-show-image">
