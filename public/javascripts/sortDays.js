@@ -11,7 +11,7 @@ const sorter = {
   }  
   
  let sortByDay = function (a, b) {
-  // console.log("hhhhiiiiittttttt")
+
   let day1 = a.day.toLowerCase();
   let day2 = b.day.toLowerCase();
   return sorter[day1] - sorter[day2];

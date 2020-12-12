@@ -70,27 +70,6 @@ module.exports = {
 	},
 	//GET /form from user of 
 	async postNewBiz(req, res, next) {
-	
-
-		// req.body.title = req.sanitize(req.body.title)
-		// req.body.music = req.sanitize(req.body.music)
-		// req.body.categories = req.sanitize(req.body.categories)
-		// req.body.categories = req.body.categories.split(',')
-
-		// req.body.array.forEach(element => {
-			
-		// });
-
-		// //sanitizer
-        // for(let key in req.body){
-		// 	req.body[key] = req.sanitize(req.body[key])
-		// 	console.log(key + '=: ' + req.body[key])
-		// }
-		// console.log("title: " +  req.body.title)
-		// console.log("music: " + typeof req.body.music)
-		// console.log("categories: " +  req.body.categories)
-		// console.log("categories typeof: " + typeof req.body.categories)
-
 
 
 		const msg = {
@@ -131,7 +110,7 @@ module.exports = {
 			  req.session.success = 'Thank you! Your email has been sent'; 
 			   
 		 } catch (error) {
-			     console.log(error)
+			    //  console.log(error)
 				  req.session.error = "Sorry, something went wrong. Please try again later.";
 			  }
 			  res.redirect('back');

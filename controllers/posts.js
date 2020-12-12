@@ -7,8 +7,6 @@ const geocodingClient = mbxGeocoding({ accessToken: mapBoxToken });
 const { cloudinary } = require('../cloudinary');
 const  sortByDay  = require('../public/javascripts/sortDays');
 
-
-
 module.exports = {
 	// Posts Index
 	async postIndex(req, res, next) {
@@ -65,22 +63,14 @@ module.exports = {
 			req.body.post.geometry = response.body.features[0].geometry;
 		}
 		
-
 		req.body.post.hours = []
-		
-		// console.log(req.body.hours)
-		// console.log(req.body.hours.length)
-
-		
+			
 		//parsing the info from the post-create
 		//pushing info into req.body.post.hours
 	   for(const j in req.body.hours){
 			req.body.post.hours.push(JSON.parse(req.body.hours[j]))
 		}
 
-		// console.log(req.body.post.hours)
-		// console.log(req.body.post.hours.length)
-		
 
 		//sorts the days in order
 		req.body.post.hours.sort(sortByDay)
@@ -169,7 +159,7 @@ module.exports = {
 			},
 		})
 
-	console.log(post)
+	// console.log(post)
 
 		const floorRating = post.calculateAvgRating();
 		let mapBoxToken = process.env.MAPBOX_TOKEN;

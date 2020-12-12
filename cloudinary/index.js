@@ -19,8 +19,7 @@ const storage = new CloudinaryStorage({
     cb(undefined, uniqFileName );
   }
 });
-//  console.log("api_secret " +  process.env.CLOUDINARY_SECRET);
-//  console.log("api_token " +  process.env.MAPBOX_TOKEN);
+
 module.exports = {
 	cloudinary,
 	storage

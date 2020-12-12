@@ -18,9 +18,7 @@ $('#addHours').on('click', function(){
     var spanHourEnd = $("<span> </span>").text(hourEnd);
 
     storeHours = {day: day, hourStart: hourStart, hourEnd: hourEnd}
-    
-    // console.log(storeHours)
-    
+        
     let inputData  = $('<input>').attr({
         type: 'hidden', 
         // value:  {day: day, hourStart: hourStart, hourEnd: hourEnd},
@@ -164,7 +162,7 @@ $('.onlineOnly').on('click', function(){
         $('.crowdInput').prop('disabled', true)
         $('.coverInput').prop('disabled', true)
         $('.isSocial').prop('disabled', true)
-    // console.log('onlineBiz ' + onlineBiz)
+   
     } else {
         $('.locationInput').prop('disabled', false)
         $('.companyHours').show()
@@ -175,7 +173,7 @@ $('.onlineOnly').on('click', function(){
 $('.isSocial').on('click', function(){
     //grabs the value of isSocial radio button
     const userSocial = $('input[name="post[isSocial]"]:checked').val();
-    // console.log('userSocial ' + userSocial)
+  
     if (userSocial == 'no'){
         $('.musicInput').prop('disabled', true)
         $('.crowdInput').prop('disabled', true)
