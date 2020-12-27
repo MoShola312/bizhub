@@ -1,4 +1,4 @@
-#BizHub - Supporting small business
+# BizHub - Supporting small business
 
 # What the project does
 This website is a hub for small businesses. A user can submit their business display on the website by clicking the "Send Your Business" link.  An admin user will then review the business and add it to the database.  Visitors to the website can view local businesses by clicking "Bizs," which will take them to the "List of Bizs" page. Users can filter their search results for a business by clicking the magnifying glass on the "Bizs/List of Bizs" page.
