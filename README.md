@@ -7,7 +7,7 @@ This website is a hub for small businesses. A user can submit their business dis
 The purpose of this project is to showcase small businesses nationwide.
 
 ## The tools used in this project
-The tools used to create this game are Javascript, jQuery, EJS, Mongoose, MongoDB, Node.js, Express, Passport, HTML, CSS, and DOM maniputlation.
+The tools used to create this game are Javascript, Bootstrap 4, jQuery, EJS, Mongoose, MongoDB, Node.js, Express, Passport, HTML, CSS, and DOM maniputlation.
 
 
 ## Profile Image
