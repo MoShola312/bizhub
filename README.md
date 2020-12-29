@@ -9,6 +9,8 @@ The purpose of this project is to showcase small businesses nationwide.
 ## The tools used in this project
 The tools used to create this game are Javascript, Bootstrap 4, jQuery, EJS, Mongoose, MongoDB, Node.js, Express, Passport, HTML, CSS, and DOM maniputlation.
 
+# Installation
+node app.js
 
 ## Profile Image
 
