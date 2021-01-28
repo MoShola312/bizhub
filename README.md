@@ -1,4 +1,18 @@
-# Profile Image
+# BizHub - Supporting small business
+
+# What the project does
+This website is a hub for small businesses. A user can submit their business display on the website by clicking the "Send Your Business" link.  An admin user will then review the business and add it to the database.  Visitors to the website can view local businesses by clicking "Bizs," which will take them to the "List of Bizs" page. Users can filter their search results for a business by clicking the magnifying glass on the "Bizs/List of Bizs" page. This website uses authentication, so users will need to create a profile and log in.
+
+## Your purpose or reason for doing this project
+The purpose of this project is to showcase small businesses nationwide.
+
+## The tools used in this project
+The tools used to create this app are Javascript, JSON, AJAX, Bootstrap 4, jQuery, EJS, Mongoose, MongoDB, Node.js, Express, Passport, HTML, CSS, and DOM maniputlation.
+
+# Installation
+node app.js
+
+## Profile Image
 
 **Problem:**
 1. Multer and body-parser have to be in a specific order to work properly together. Multer (image upload) wants to be first in line, otherwise we end up with an empty req.body object.
