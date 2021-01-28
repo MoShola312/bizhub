@@ -1,7 +1,6 @@
 mapboxgl.accessToken = mapBoxToken;
 
 
-// console.log(hours);
 
 //hides the reply form when the page loads
 $('.reply-form').hide();
