@@ -15,7 +15,7 @@ const middleware = {
 	asyncErrorHandler: (fn) =>
 		(req, res, next) => {
 			Promise.resolve(fn(req, res, next))
-						 .catch(next);
+						 .catch(next); 
 		},
 	isReviewAuthor: async (req, res, next) => {
 		let review = await Review.findById(req.params.review_id);
