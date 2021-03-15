@@ -110,7 +110,7 @@ module.exports = {
 			  req.session.success = 'Thank you! Your email has been sent'; 
 			   
 		 } catch (error) {
-			    //  console.log(error)
+			    //  console.log(error) 
 				  req.session.error = "Sorry, something went wrong. Please try again later.";
 			  }
 			  res.redirect('back');
