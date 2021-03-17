@@ -3,7 +3,7 @@ $('#addHours').on('click', function(){
     //reads the selected day/hours and converts it into texts
 
     const day = $('#day option:selected').val();
-    // let day = $('[name=day] option:selected').text();
+   
     let hourStart = $('#hourStart option:selected').text();
     let hourEnd = $('#hourEnd option:selected').text();
     
@@ -37,6 +37,20 @@ $('#addHours').on('click', function(){
     // removeDiv()
       
 }); 
+
+
+// -----images input----
+// console.log($('#images').files)
+
+// $("form").submit(function(e){
+//     e.preventDefault();
+
+//     console.log($('#images').length)
+//     console.log($('form').serialize())
+//     alert('You can only submit 4 images!');
+   
+// });
+
    
 //binds to document
 //attach function to .remove-hours(remove link)
@@ -53,6 +67,7 @@ function removeDiv(newClassName, bindID){
         } 
     });
 };
+
 
 ////-------------------catgeroies input---------------------------//////
 
