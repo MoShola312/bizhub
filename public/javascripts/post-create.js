@@ -46,7 +46,7 @@ $('#addHours').on('click', function(){
 //     e.preventDefault();
 
 //     console.log($('#images').length)
-//     console.log($('form').serialize())
+    
 //     alert('You can only submit 4 images!');
    
 // });

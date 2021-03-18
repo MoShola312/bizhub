@@ -2,14 +2,18 @@
 <div class="container-fluid">
 	<div class="row">
 	
-		<% post.images.forEach(function(image) { %>
+		
+		<% try  {%>
+			<% let p = 0  %>
+			<% while (p < 4) { %>
+	
 		<div class="img-div col-lg-3">
-			<a href="#a<%=image._id%>"  role="button" data-toggle="modal">
-				<img class="thumbnail-img img-fluid" src="<%= image.path %>" alt=" " > 
+			<a href="#a<%=post.images[p]._id%>"  role="button" data-toggle="modal">
+				<img class="thumbnail-img img-fluid" src="<%= post.images[p].path %>" alt=" " > 
 			</a>	
 		</div>
 			<!-- Modal -->
-			<div class="modal fade" id="a<%= image._id%>" tabindex="-1" role="dialog" aria-labelledby="#a<%= image._id%>" aria-hidden="true">
+			<div class="modal fade" id="a<%= post.images[p]._id%>" tabindex="-1" role="dialog" aria-labelledby="#a<%= post.images[p]._id%>" aria-hidden="true">
 				<div class="modal-dialog modal-xl" role="document">
 					<div class="modal-content">
 						<div class="container">
@@ -22,15 +26,19 @@
 										</button>
 									</div>
 									<div class="modal-body mx-auto">
-										<img class="img-fluid rounded mb-5" src="<%= image.path %>" alt="">
+										<img class="img-fluid rounded mb-5" src="<%= post.images[p].path %>" alt="">
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-			</div>	
-		<% }); %>
+			</div>
+			<% ++p %>	
+		<% }; %>
+		<% } catch(error) {%>
+
+		<% } %>
 
 		<% if(post.images.length > 4){ %>
 			<div class="overlay">

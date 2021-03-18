@@ -8,9 +8,10 @@ cloudinary.config({
 const { CloudinaryStorage } = require('multer-storage-cloudinary');
 const storage = new CloudinaryStorage({
   cloudinary,
-//   folder: 'surf-shop',
-  folder: 'bizhub',
-  allowedFormats: ['jpeg', 'jpg', 'png'],
+  params: {
+	folder: 'bizhub',
+	allowedFormats: ['jpeg', 'jpg', 'png']
+},
   filename: function (req, file, cb) {
   	let buf = crypto.randomBytes(16);
   	buf = buf.toString('hex');
