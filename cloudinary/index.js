@@ -10,7 +10,7 @@ const storage = new CloudinaryStorage({
   cloudinary,
   params: {
 	folder: 'bizhub',
-	allowedFormats: ['jpeg', 'jpg', 'png']
+	allowed_formats: ['jpeg', 'jpg', 'png']
 },
   filename: function (req, file, cb) {
   	let buf = crypto.randomBytes(16);
