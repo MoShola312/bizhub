@@ -40,16 +40,19 @@ $('#addHours').on('click', function(){
 
 
 // -----images input----
-// console.log($('#images').files)
 
-// $("form").submit(function(e){
-//     e.preventDefault();
+const numOfImages = $('input[type="file"]')
 
-//     console.log($('#images').length)
-    
-//     alert('You can only submit 4 images!');
-   
-// });
+$("form").submit(function(e){
+    if(numOfImages[0].files.length > 4){
+        e.preventDefault();
+        $('.imagesUp').append('<p>You can only submit 4 images!</p>').css('color', 'red')
+        
+    }
+
+    console.log(numOfImages[0].files.length)
+       
+});
 
    
 //binds to document
