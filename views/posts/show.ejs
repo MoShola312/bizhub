@@ -5,8 +5,8 @@
 		
 		<% try  {%>
 			<% let p = 0  %>
-			<% while (p < 4) { %>
-	
+		
+				<%  while (p < 4) { %>
 		<div class="img-div col-lg-3">
 			<a href="#a<%=post.images[p]._id%>"  role="button" data-toggle="modal">
 				<img class="thumbnail-img img-fluid" src="<%= post.images[p].path %>" alt=" " > 
@@ -37,7 +37,7 @@
 			<% ++p %>	
 		<% }; %>
 		<% } catch(error) {%>
-
+			<% console.log(error) %>
 		<% } %>
 
 		<% if(post.images.length > 4){ %>

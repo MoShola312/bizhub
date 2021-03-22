@@ -40,18 +40,14 @@ $('#addHours').on('click', function(){
 
 
 // -----images input----
-
+//limits how many images can be submitted at one time
 const numOfImages = $('input[type="file"]')
-
 $("form").submit(function(e){
     if(numOfImages[0].files.length > 4){
         e.preventDefault();
         $('.imagesUp').append('<p>You can only submit 4 images!</p>').css('color', 'red')
         
     }
-
-    console.log(numOfImages[0].files.length)
-       
 });
 
    
