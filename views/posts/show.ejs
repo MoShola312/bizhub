@@ -3,10 +3,7 @@
 	<div class="row">
 	
 		
-		<% try  {%>
-			<% let p = 0  %>
-		
-				<%  while (p < 4) { %>
+	<% for (let p = 0; (p < 4) && (p < post.images.length); p++ ) { %>
 		<div class="img-div col-lg-3">
 			<a href="#a<%=post.images[p]._id%>"  role="button" data-toggle="modal">
 				<img class="thumbnail-img img-fluid" src="<%= post.images[p].path %>" alt=" " > 
@@ -33,18 +30,15 @@
 						</div>
 					</div>
 				</div>
-			</div>
-			<% ++p %>	
-		<% }; %>
-		<% } catch(error) {%>
-			<% console.log(error) %>
-		<% } %>
+			</div>	
+	<% }; %>
+		
 
-		<% if(post.images.length > 4){ %>
+	<% if(post.images.length > 4){ %>
 			<div class="overlay">
-				<a href="/posts/<%= post.id %>/biz_photos"><button type="button" class="btn btn-dark"><span>+<%=post.images.length %></span></button></a>
+				<a href="/posts/<%= post.id %>/biz_photos"><button type="button" class="btn btn-dark biz-photos"><span>+<%=post.images.length %></span></button></a>
 			</div>
-		<% } %>
+	<% } %>
 		
 	</div>
 </div>

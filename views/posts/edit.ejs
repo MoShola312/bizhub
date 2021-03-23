@@ -13,9 +13,13 @@
 				
 					<input class="form-control" id="ownerEmail" type="email" name="post[businessOwnerEmail]"  placeholder="Business owner's email"> </div>
 			
-					<div><label for="price" width="100px">Cover<input type="number" id="price" class="form-control" name="post[price]" step="1.00" placeholder="Cover charge?" value="<%= post.price  %>"></label></div>
+					<div class="form-group">
+						<label for="price" width="100px">Cover</label>
+						<input type="number" id="price" class="form-control" name="post[price]" step="1.00" placeholder="Cover charge?" value="<%= post.price  %>">
+					</div>
 				<div class="form-group">
-					<input type="file" class="form-control" id="imageUpload" accept="images/*" name="images" multiple />
+					<label>Upload up to 4 images</label>
+					<input type="file" class="form-control" style="height: 5%;" id="imageUpload" accept="images/*" name="images" multiple />
 				</div>
 					<div class="form-group">
 						<% post.images.forEach(function(image, i) { %>

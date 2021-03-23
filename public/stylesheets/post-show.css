@@ -38,12 +38,19 @@
 }
 .overlay{
   position: absolute;
-  top: 15%;
-  right: 9%;
+  top: 25%;
+  right: 10%;
   transform: translate(-50%,-50%);
   -ms-transform: translate(-50%, -50%);
   z-index: 2
 }
+
+.biz-photos{
+  width: 60 px;
+  border: 60 rem;
+  border-color: brown;
+}
+
 /* div {
 border: 2px solid blue;
 
