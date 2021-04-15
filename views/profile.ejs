@@ -52,7 +52,7 @@
 					<div>
 						<% for(let i = 0; i < post.reviews.length; i++){ %>
 							<% if(review._id.equals(post.reviews[i])){ %>
-							<p>You wrote a review for <a href="/posts/<%= post.id %>"><%= post.title %></a><br> <%= review.body %> </p>
+							<p><%= user.username %> wrote a review for <a href="/posts/<%= post.id %>"><%= post.title %></a><br> <%= review.body %> </p>
 							<hr>
 							<% } %>
 						<% } %>
