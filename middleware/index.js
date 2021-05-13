@@ -196,21 +196,19 @@ reqBodySanitizer: (req, res, next) => {
 				let coordinates;
 				try {
 					if(typeof JSON.parse(location) === 'number') {
-						throw new Error;
+					  throw new Error;
 					}
 					location = JSON.parse(location);
 					coordinates = location;
-				} catch (err) {
-					// geocode the location to extract geo-coordinates (lat, lng)
+				  } catch(err) {
 					const response = await geocodingClient
-					.forwardGeocode({
+					  .forwardGeocode({
 						query: location,
 						limit: 1
-					})
-					.send();
-					// destructure coordinates [ <longitude> , <latitude> ]
-					coordinates  = response.body.features[0].geometry.coordinates;
-				}
+					  })
+					  .send();
+					coordinates = response.body.features[0].geometry.coordinates;
+				  }
 				// get the max distance or set it to 25 mi
 				let maxDistance = distance || 25;
 				// we need to convert the distance to meters, one mile is approximately 1609.34 meters
