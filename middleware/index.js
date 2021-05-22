@@ -205,7 +205,7 @@ reqBodySanitizer: (req, res, next) => {
 					  .forwardGeocode({
 						query: location,
 						limit: 1
-					  })
+					  })  
 					  .send();
 					coordinates = response.body.features[0].geometry.coordinates;
 				  }
