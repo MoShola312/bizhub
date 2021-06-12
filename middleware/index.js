@@ -204,7 +204,7 @@ reqBodySanitizer: (req, res, next) => {
 					const response = await geocodingClient
 					  .forwardGeocode({
 						query: location,
-						limit: 1
+						limit: 1     
 					  })  
 					  .send();
 					coordinates = response.body.features[0].geometry.coordinates;
